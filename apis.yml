@@ -1,0 +1,29 @@
+aid: baseten
+url: https://raw.githubusercontent.com/api-evangelist/baseten/refs/heads/main/apis.yml
+name: Baseten
+x-type: company
+description: >-
+  Baseten is a production inference platform for deploying and serving custom ML models. Offers model deployment via Truss, autoscaling, GPU access, and a hosted model library with OpenAI-compatible APIs.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - AI
+  - ML
+  - Inference
+  - Deployment
+  - MLOps
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.baseten.co/
+  - type: Plans
+    url: plans/baseten-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/baseten-rate-limits.yml
+  - type: FinOps
+    url: finops/baseten-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
