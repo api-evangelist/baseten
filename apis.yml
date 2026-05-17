@@ -1,7 +1,7 @@
 aid: baseten
 url: https://raw.githubusercontent.com/api-evangelist/baseten/refs/heads/main/apis.yml
 name: Baseten
-x-type: company
+kind: company
 description: >-
   Baseten is a production inference platform for deploying and serving custom and pre-trained
   ML models. Offers a Model APIs catalog with OpenAI-compatible endpoints (DeepSeek, Qwen,
