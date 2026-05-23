@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TextBlock",
+  "title": "TextBlock",
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "type",
+    "text"
+  ],
+  "description": "A text content block.",
+  "properties": {
+    "type": {
+      "const": "text",
+      "type": "string",
+      "description": "The block type, always `text`."
+    },
+    "text": {
+      "type": "string",
+      "description": "The text content."
+    }
+  }
+}

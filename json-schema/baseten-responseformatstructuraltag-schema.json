@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ResponseFormatStructuralTag",
+  "title": "ResponseFormatStructuralTag",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "structural_tag",
+      "title": "Type",
+      "type": "string",
+      "description": "The response format type, always `structural_tag`."
+    },
+    "structural_tag": {
+      "title": "Structural Tag",
+      "type": "string",
+      "description": "The structural tag definition."
+    }
+  },
+  "required": [
+    "type",
+    "structural_tag"
+  ],
+  "type": "object",
+  "description": "Structural tag response format."
+}

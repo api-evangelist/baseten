@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PromptTokensDetails",
+  "title": "PromptTokensDetails",
+  "additionalProperties": false,
+  "properties": {
+    "audio_tokens": {
+      "default": 0,
+      "title": "Audio Tokens",
+      "type": "integer",
+      "description": "Number of audio tokens in the prompt."
+    },
+    "cached_tokens": {
+      "default": 0,
+      "title": "Cached Tokens",
+      "type": "integer",
+      "description": "Number of tokens retrieved from cache."
+    }
+  },
+  "type": "object",
+  "description": "Breakdown of tokens used in the prompt."
+}

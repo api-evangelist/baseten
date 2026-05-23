@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ResponseFormatGrammar",
+  "title": "ResponseFormatGrammar",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "grammar",
+      "title": "Type",
+      "type": "string",
+      "description": "The response format type, always `grammar`."
+    },
+    "grammar": {
+      "title": "Grammar",
+      "type": "string",
+      "description": "The grammar definition string."
+    }
+  },
+  "required": [
+    "type",
+    "grammar"
+  ],
+  "type": "object",
+  "description": "Grammar-based response format."
+}

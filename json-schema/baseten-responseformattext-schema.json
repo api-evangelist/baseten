@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ResponseFormatText",
+  "title": "ResponseFormatText",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "text",
+      "title": "Type",
+      "type": "string",
+      "description": "The response format type, always `text`."
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "description": "Plain text response format."
+}

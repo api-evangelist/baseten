@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CompletionTokensDetails",
+  "title": "CompletionTokensDetails",
+  "additionalProperties": false,
+  "properties": {
+    "accepted_prediction_tokens": {
+      "default": 0,
+      "title": "Accepted Prediction Tokens",
+      "type": "integer",
+      "description": "Number of tokens in accepted predictions (for speculative decoding)."
+    },
+    "audio_tokens": {
+      "default": 0,
+      "title": "Audio Tokens",
+      "type": "integer",
+      "description": "Number of audio tokens generated."
+    },
+    "reasoning_tokens": {
+      "default": 0,
+      "title": "Reasoning Tokens",
+      "type": "integer",
+      "description": "Number of tokens used for reasoning (for models that support extended thinking)."
+    },
+    "rejected_prediction_tokens": {
+      "default": 0,
+      "title": "Rejected Prediction Tokens",
+      "type": "integer",
+      "description": "Number of tokens in rejected predictions (for speculative decoding)."
+    }
+  },
+  "type": "object",
+  "description": "Breakdown of tokens used in the completion."
+}

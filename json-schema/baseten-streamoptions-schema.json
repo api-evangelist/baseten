@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/StreamOptions",
+  "title": "StreamOptions",
+  "additionalProperties": false,
+  "properties": {
+    "include_usage": {
+      "default": true,
+      "title": "Include Usage",
+      "description": "If `true`, includes token usage statistics in the final streaming chunk.",
+      "type": "boolean"
+    },
+    "continuous_usage_stats": {
+      "default": true,
+      "title": "Continuous Usage Stats",
+      "description": "If `true`, includes running token usage statistics in each streaming chunk.",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "description": "Options for streaming responses."
+}

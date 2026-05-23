@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DisaggregatedParams",
+  "title": "DisaggregatedParams",
+  "additionalProperties": false,
+  "properties": {
+    "request_type": {
+      "title": "Request Type",
+      "type": "string",
+      "description": "The type of disaggregated request."
+    },
+    "first_gen_tokens": {
+      "default": null,
+      "title": "First Gen Tokens",
+      "description": "First generation tokens for continuation.",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "ctx_request_id": {
+      "default": null,
+      "title": "Ctx Request Id",
+      "description": "Context request identifier.",
+      "type": "integer"
+    },
+    "opaque_state": {
+      "default": null,
+      "title": "Opaque State",
+      "description": "Opaque state for continuation.",
+      "type": "string"
+    },
+    "draft_tokens": {
+      "default": null,
+      "title": "Draft Tokens",
+      "description": "Draft tokens for speculative decoding.",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "multimodal_embedding_handles": {
+      "default": null,
+      "title": "Multimodal Embedding Handles",
+      "description": "Handles for multimodal embeddings.",
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "multimodal_hashes": {
+      "default": null,
+      "title": "Multimodal Hashes",
+      "description": "Hashes for multimodal content.",
+      "items": {
+        "items": {
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "request_type"
+  ],
+  "type": "object",
+  "description": "Advanced parameters for disaggregated serving. Used internally."
+}

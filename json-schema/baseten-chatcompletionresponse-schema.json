@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionResponse",
+  "title": "ChatCompletionStreamResponse",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string",
+      "description": "A unique identifier for the chat completion."
+    },
+    "object": {
+      "const": "chat.completion.chunk",
+      "default": "chat.completion.chunk",
+      "title": "Object",
+      "type": "string",
+      "description": "The object type, always `chat.completion` or `chat.completion.chunk` for streaming."
+    },
+    "created": {
+      "title": "Created",
+      "type": "integer",
+      "description": "The Unix timestamp (in seconds) of when the completion was created."
+    },
+    "model": {
+      "title": "Model",
+      "type": "string",
+      "description": "The model used for the completion."
+    },
+    "choices": {
+      "items": {
+        "$ref": "#/components/schemas/ChatCompletionResponseStreamChoice"
+      },
+      "title": "Choices",
+      "type": "array",
+      "description": "A list of chat completion choices."
+    },
+    "usage": {
+      "default": null,
+      "description": "Token usage statistics for the request. Only present when streaming with `stream_options.include_usage: true`.",
+      "$ref": "#/components/schemas/UsageInfo"
+    }
+  },
+  "required": [
+    "model",
+    "choices"
+  ],
+  "type": "object",
+  "description": "A chat completion response returned by the model."
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InputAudio",
+  "title": "InputAudio",
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "title": "Data",
+      "type": "string",
+      "description": "Base64-encoded audio data."
+    },
+    "format": {
+      "enum": [
+        "wav",
+        "mp3"
+      ],
+      "title": "Format",
+      "type": "string",
+      "description": "The audio format: `wav` or `mp3`."
+    }
+  },
+  "required": [
+    "data",
+    "format"
+  ],
+  "type": "object",
+  "description": "Audio input data."
+}

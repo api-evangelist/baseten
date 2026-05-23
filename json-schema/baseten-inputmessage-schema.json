@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InputMessage",
+  "title": "InputMessage",
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "role",
+    "content"
+  ],
+  "description": "A message in the conversation.",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "user",
+        "assistant"
+      ],
+      "description": "The role of the message author. System prompts are passed via the top-level `system` field, not as a message."
+    },
+    "content": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TextBlock"
+              },
+              {
+                "$ref": "#/components/schemas/ToolUseBlock"
+              },
+              {
+                "$ref": "#/components/schemas/ToolResultBlock"
+              }
+            ]
+          }
+        }
+      ],
+      "description": "The message content. Pass a string for text-only messages or an array of content blocks for messages that include tool calls or tool results."
+    }
+  }
+}

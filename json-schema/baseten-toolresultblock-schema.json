@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ToolResultBlock",
+  "title": "ToolResultBlock",
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "type",
+    "tool_use_id",
+    "content"
+  ],
+  "description": "A tool result content block supplied by the user in response to a tool call.",
+  "properties": {
+    "type": {
+      "const": "tool_result",
+      "type": "string",
+      "description": "The block type, always `tool_result`."
+    },
+    "tool_use_id": {
+      "type": "string",
+      "description": "The `id` of the `tool_use` block this result responds to."
+    },
+    "content": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TextBlock"
+          }
+        }
+      ],
+      "description": "The tool's output. Pass a string for simple results or an array of text blocks for structured output."
+    },
+    "is_error": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set to `true` if the tool call raised an error."
+    }
+  }
+}

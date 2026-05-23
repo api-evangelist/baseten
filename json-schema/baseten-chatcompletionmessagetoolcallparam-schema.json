@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionMessageToolCallParam",
+  "title": "ChatCompletionMessageToolCallParam",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string",
+      "description": "The ID of the tool call."
+    },
+    "index": {
+      "title": "Index",
+      "description": "The index of the tool call.",
+      "type": "integer"
+    },
+    "function": {
+      "$ref": "#/components/schemas/Function",
+      "description": "The function that was called."
+    },
+    "type": {
+      "const": "function",
+      "title": "Type",
+      "type": "string",
+      "description": "The type, always `function`."
+    }
+  },
+  "required": [
+    "id",
+    "function",
+    "type"
+  ],
+  "type": "object",
+  "description": "A tool call in an assistant message."
+}

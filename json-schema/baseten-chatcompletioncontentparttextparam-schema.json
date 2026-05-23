@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionContentPartTextParam",
+  "title": "ChatCompletionContentPartTextParam",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "text",
+      "title": "Type",
+      "type": "string",
+      "description": "The content type, always `text`."
+    },
+    "text": {
+      "title": "Text",
+      "type": "string",
+      "description": "The text content."
+    }
+  },
+  "required": [
+    "type",
+    "text"
+  ],
+  "type": "object",
+  "description": "Text content part."
+}

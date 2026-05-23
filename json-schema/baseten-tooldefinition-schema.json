@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ToolDefinition",
+  "title": "ToolDefinition",
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "name",
+    "input_schema"
+  ],
+  "description": "A tool the model can call.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "A unique name for the tool."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of what the tool does. The model uses this to decide when to call it."
+    },
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "A JSON Schema object describing the tool's expected input."
+    }
+  }
+}

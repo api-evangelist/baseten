@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FunctionDefinition",
+  "title": "FunctionDefinition",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "The name of the function."
+    },
+    "description": {
+      "default": null,
+      "title": "Description",
+      "description": "A description of what the function does.",
+      "type": "string"
+    },
+    "parameters": {
+      "default": null,
+      "title": "Parameters",
+      "description": "The parameters the function accepts, as a JSON Schema object.",
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "strict": {
+      "default": false,
+      "title": "Strict",
+      "description": "If `true`, enables strict schema adherence.",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "description": "A function definition that the model can call."
+}

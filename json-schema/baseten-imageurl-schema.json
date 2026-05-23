@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImageURL",
+  "title": "ImageURL",
+  "additionalProperties": false,
+  "properties": {
+    "url": {
+      "title": "Url",
+      "type": "string",
+      "description": "The URL of the image, or a base64-encoded data URL."
+    },
+    "detail": {
+      "default": null,
+      "title": "Detail",
+      "description": "The detail level: `auto` (default), `low` (512px max), or `high` (full resolution).",
+      "enum": [
+        "auto",
+        "low",
+        "high"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "url"
+  ],
+  "type": "object",
+  "description": "An image URL with optional detail settings."
+}

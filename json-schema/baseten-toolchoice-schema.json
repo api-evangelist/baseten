@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ToolChoice",
+  "title": "ToolChoice",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "auto",
+          "type": "string",
+          "description": "The model decides whether to call a tool."
+        },
+        "disable_parallel_tool_use": {
+          "type": "boolean",
+          "default": false,
+          "description": "If `true`, restricts the model to calling at most one tool per response."
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "any",
+          "type": "string",
+          "description": "The model must call a tool but may pick which one."
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "type": {
+          "const": "tool",
+          "type": "string",
+          "description": "The model must call the named tool."
+        },
+        "name": {
+          "type": "string",
+          "description": "The exact name of the tool to call."
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "none",
+          "type": "string",
+          "description": "The model must not call any tool."
+        }
+      }
+    }
+  ],
+  "description": "Controls which tool (if any) the model calls."
+}

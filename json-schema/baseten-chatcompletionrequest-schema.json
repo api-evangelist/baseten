@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionRequest",
+  "title": "ChatCompletionRequest",
+  "additionalProperties": false,
+  "properties": {
+    "messages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ChatCompletionMessage"
+      },
+      "description": "A list of messages representing the conversation history. Supports roles: `system`, `user`, `assistant`, and `tool`."
+    },
+    "model": {
+      "title": "Model",
+      "type": "string",
+      "description": "The model slug to use for completion, such as `deepseek-ai/DeepSeek-V4-Pro`. Find available models at [Model APIs](https://app.baseten.co/model-apis/create)."
+    },
+    "frequency_penalty": {
+      "default": 0,
+      "title": "Frequency Penalty",
+      "description": "Penalizes tokens based on how frequently they appear in the text so far. Positive values decrease repetition. Support varies by model.",
+      "type": "number"
+    },
+    "logit_bias": {
+      "default": null,
+      "title": "Logit Bias",
+      "description": "A map of token IDs to bias values (-100 to 100). Use this to increase or decrease the likelihood of specific tokens appearing in the output.",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "type": "object"
+    },
+    "logprobs": {
+      "default": false,
+      "title": "Logprobs",
+      "description": "If `true`, returns log probabilities of the output tokens. Log probability support varies by model.",
+      "type": "boolean"
+    },
+    "top_logprobs": {
+      "default": 0,
+      "title": "Top Logprobs",
+      "description": "Number of most likely tokens to return at each position (0-20). Requires `logprobs: true`. Log probability support varies by model.",
+      "type": "integer"
+    },
+    "max_tokens": {
+      "default": 4096,
+      "maximum": 262144,
+      "minimum": 1,
+      "title": "Max Tokens",
+      "type": "integer",
+      "description": "Maximum number of tokens to generate. If your request input plus `max_tokens` exceeds the model's context length, `max_tokens` is truncated. If your request exceeds the context length by more than 16k tokens or if `max_tokens` signals no preference, context reservation is throttled to 49512 tokens. Higher `max_tokens` values slightly deprioritize request scheduling."
+    },
+    "n": {
+      "default": 1,
+      "title": "N",
+      "description": "Number of completions to generate. Only `1` is supported.",
+      "type": "integer"
+    },
+    "presence_penalty": {
+      "default": 0,
+      "title": "Presence Penalty",
+      "description": "Penalizes tokens based on whether they have appeared in the text so far. Positive values encourage the model to discuss new topics. Support varies by model.",
+      "type": "number"
+    },
+    "response_format": {
+      "anyOf": [
+        {
+          "$ref": "#/components/schemas/ResponseFormatText"
+        },
+        {
+          "$ref": "#/components/schemas/ResponseFormatJson"
+        },
+        {
+          "$ref": "#/components/schemas/ResponseFormatJsonObject"
+        },
+        {
+          "$ref": "#/components/schemas/ResponseFormatGrammar"
+        },
+        {
+          "$ref": "#/components/schemas/ResponseFormatStructuralTag"
+        }
+      ],
+      "default": null,
+      "title": "Response Format",
+      "description": "Specifies the output format. Use `{\"type\": \"json_object\"}` for JSON mode, or `{\"type\": \"json_schema\", \"json_schema\": {...}}` for structured outputs with a specific schema."
+    },
+    "seed": {
+      "default": null,
+      "title": "Seed",
+      "description": "Random seed for deterministic generation. Determinism is not guaranteed across different hardware or model versions.",
+      "type": "integer"
+    },
+    "stop": {
+      "anyOf": [
+        {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "items": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "type": "array"
+        }
+      ],
+      "title": "Stop",
+      "description": "Up to 32 sequences where the API stops generating further tokens. Can be a string or array of strings."
+    },
+    "stream": {
+      "default": false,
+      "title": "Stream",
+      "description": "If `true`, responses are streamed back as server-sent events (SSE) as they are generated.",
+      "type": "boolean"
+    },
+    "stream_options": {
+      "default": null,
+      "description": "Options for streaming responses. Set `include_usage: true` to receive token usage statistics in the final chunk.",
+      "$ref": "#/components/schemas/StreamOptions"
+    },
+    "temperature": {
+      "default": null,
+      "title": "Temperature",
+      "description": "Controls randomness in the output. Lower values like 0.2 produce more focused and deterministic responses. Higher values like 1.5 produce more creative and varied output.",
+      "maximum": 4,
+      "minimum": 0,
+      "type": "number"
+    },
+    "top_p": {
+      "default": 1,
+      "title": "Top P",
+      "description": "Nucleus sampling: only consider tokens with cumulative probability up to this value. Lower values like 0.1 produce more focused output.",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "type": "number"
+    },
+    "tools": {
+      "default": null,
+      "title": "Tools",
+      "description": "A list of tools (functions) the model may call. Each tool should have a `type: \"function\"` and a `function` object with `name`, `description`, and `parameters`.",
+      "items": {
+        "$ref": "#/components/schemas/ChatCompletionToolsParam"
+      },
+      "type": "array"
+    },
+    "tool_choice": {
+      "anyOf": [
+        {
+          "enum": [
+            "none",
+            "required",
+            "auto"
+          ],
+          "type": "string"
+        },
+        {
+          "$ref": "#/components/schemas/ChatCompletionNamedToolChoiceParam"
+        }
+      ],
+      "default": null,
+      "title": "Tool Choice",
+      "description": "Controls which tool (if any) the model calls.\n\n- `none`: Never call a tool.\n- `auto`: Model decides whether to call a tool.\n- `required`: Model must call at least one tool.\n- `{\"type\": \"function\", \"function\": {\"name\": \"...\"}}`: Call a specific function."
+    },
+    "parallel_tool_calls": {
+      "default": true,
+      "title": "Parallel Tool Calls",
+      "description": "If `true`, the model can call multiple tools in a single response.",
+      "type": "boolean"
+    },
+    "user": {
+      "default": null,
+      "title": "User",
+      "description": "A unique identifier for the end-user, useful for tracking and abuse detection.",
+      "type": "string"
+    },
+    "best_of": {
+      "default": null,
+      "title": "Best Of",
+      "description": "Number of candidate sequences to generate and return the best from. Only a value of 1 is supported.",
+      "maximum": 1,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "top_k": {
+      "default": 50,
+      "title": "Top K",
+      "description": "Limits token selection to the top K most probable tokens at each step. Lower values like 10 produce more focused output. Set to -1 to disable.",
+      "type": "integer"
+    },
+    "top_p_min": {
+      "default": 0,
+      "title": "Top P Min",
+      "type": "number",
+      "description": "Minimum value for dynamic `top_p`. When set, `top_p` dynamically adjusts but does not go below this value."
+    },
+    "min_p": {
+      "default": 0,
+      "title": "Min P",
+      "type": "number",
+      "description": "Minimum probability threshold for token selection. Filters out tokens with probability below `min_p * max_probability`."
+    },
+    "repetition_penalty": {
+      "default": 1,
+      "title": "Repetition Penalty",
+      "type": "number",
+      "description": "Multiplicative penalty for repeated tokens. Values greater than 1.0 discourage repetition, values less than 1.0 encourage it."
+    },
+    "length_penalty": {
+      "default": 1,
+      "title": "Length Penalty",
+      "type": "number",
+      "description": "Exponential penalty applied to sequence length during beam search. Values greater than 1.0 favor longer sequences."
+    },
+    "early_stopping": {
+      "default": false,
+      "title": "Early Stopping",
+      "type": "boolean",
+      "description": "If `true`, stops generation when at least `n` complete candidates are found."
+    },
+    "bad": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ],
+      "title": "Bad",
+      "description": "Words or phrases to avoid in the output. Support varies by model."
+    },
+    "bad_token_ids": {
+      "title": "Bad Token Ids",
+      "description": "Token IDs to avoid in the output. Support varies by model.",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "stop_token_ids": {
+      "title": "Stop Token Ids",
+      "description": "List of token IDs that cause generation to stop when encountered.",
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "include_stop_str_in_output": {
+      "default": false,
+      "title": "Include Stop Str In Output",
+      "type": "boolean",
+      "description": "If `true`, includes the matched stop string in the output."
+    },
+    "ignore_eos": {
+      "default": false,
+      "title": "Ignore Eos",
+      "type": "boolean",
+      "description": "If `true`, continues generating past the end-of-sequence token."
+    },
+    "min_tokens": {
+      "default": 0,
+      "title": "Min Tokens",
+      "type": "integer",
+      "description": "Minimum number of tokens to generate before stopping. Useful for ensuring responses are not too short."
+    },
+    "skip_special_tokens": {
+      "default": true,
+      "title": "Skip Special Tokens",
+      "type": "boolean",
+      "description": "If `true`, removes special tokens from the generated output."
+    },
+    "spaces_between_special_tokens": {
+      "default": true,
+      "title": "Spaces Between Special Tokens",
+      "type": "boolean",
+      "description": "If `true`, adds spaces between special tokens in the output."
+    },
+    "truncate_prompt_tokens": {
+      "default": null,
+      "title": "Truncate Prompt Tokens",
+      "description": "If set, truncates the prompt to this many tokens. Useful for handling inputs that may exceed context limits.",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "echo": {
+      "default": false,
+      "description": "If `true` and the last message role matches the generation role, prepends that message to the output.",
+      "title": "Echo",
+      "type": "boolean"
+    },
+    "add_generation_prompt": {
+      "default": true,
+      "description": "If `true`, adds the generation prompt from the chat template, such as `<|assistant|>`. Set to `false` for completion-style generation.",
+      "title": "Add Generation Prompt",
+      "type": "boolean"
+    },
+    "add_special_tokens": {
+      "default": false,
+      "description": "If `true`, adds special tokens like BOS to the prompt beyond what the chat template adds. For most models, the chat template handles special tokens, so this should be `false`.",
+      "title": "Add Special Tokens",
+      "type": "boolean"
+    },
+    "documents": {
+      "default": null,
+      "description": "A list of documents for RAG (retrieval-augmented generation). Each document is a dict with string keys and values that the model can reference.",
+      "title": "Documents",
+      "items": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "chat_template": {
+      "default": null,
+      "description": "A custom Jinja template for formatting the conversation. If not provided, uses the model's default template.",
+      "title": "Chat Template",
+      "type": "string"
+    },
+    "chat_template_args": {
+      "default": null,
+      "description": "Additional arguments to pass to the chat template renderer.",
+      "title": "Chat Template Args",
+      "additionalProperties": true,
+      "type": "object"
+    },
+    "disaggregated_params": {
+      "default": null,
+      "description": "Advanced parameters for disaggregated serving. Used internally for distributed inference.",
+      "$ref": "#/components/schemas/DisaggregatedParams"
+    }
+  },
+  "required": [
+    "messages",
+    "model"
+  ],
+  "type": "object",
+  "description": "Request body for creating a chat completion."
+}

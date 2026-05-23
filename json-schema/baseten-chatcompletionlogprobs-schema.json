@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionLogProbs",
+  "title": "ChatCompletionLogProbs",
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "default": null,
+      "title": "Content",
+      "description": "A list of log probability information for each token in the content.",
+      "items": {
+        "$ref": "#/components/schemas/ChatCompletionLogProbsContent"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "description": "Log probability information for the completion."
+}

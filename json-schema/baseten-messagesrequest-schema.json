@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MessagesRequest",
+  "title": "MessagesRequest",
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "model",
+    "messages",
+    "max_tokens"
+  ],
+  "description": "Request body for creating a message.",
+  "properties": {
+    "model": {
+      "type": "string",
+      "title": "Model",
+      "description": "The model slug to use. Find available models at [Model APIs](https://app.baseten.co/model-apis/create)."
+    },
+    "messages": {
+      "type": "array",
+      "title": "Messages",
+      "description": "The conversation history as an ordered list of input messages. Alternating `user` and `assistant` roles are expected; the final message must be from the `user`.",
+      "items": {
+        "$ref": "#/components/schemas/InputMessage"
+      }
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "title": "Max Tokens",
+      "description": "The maximum number of tokens to generate in the response. Required by the Messages API. The response may be shorter if it finishes naturally or hits a stop sequence."
+    },
+    "system": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TextBlock"
+          }
+        }
+      ],
+      "title": "System",
+      "description": "A system prompt that sets the model's behavior. Pass either a single string or an array of text content blocks."
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 1,
+      "title": "Temperature",
+      "description": "Controls randomness. Lower values are more deterministic. Range: 0 to 1."
+    },
+    "top_p": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "title": "Top P",
+      "description": "Nucleus sampling: only consider tokens with cumulative probability up to this value."
+    },
+    "top_k": {
+      "type": "integer",
+      "minimum": 0,
+      "title": "Top K",
+      "description": "Limits token selection to the top K most probable tokens at each step."
+    },
+    "stop_sequences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Stop Sequences",
+      "description": "Custom text sequences that will stop generation. When a stop sequence is hit, `stop_reason` is `stop_sequence` and `stop_sequence` contains the matched string."
+    },
+    "stream": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stream",
+      "description": "If `true`, the response is streamed as server-sent events. Each event has a `type` such as `message_start`, `content_block_delta`, or `message_stop`."
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ToolDefinition"
+      },
+      "title": "Tools",
+      "description": "A list of tools the model may call. Each tool has a `name`, `description`, and `input_schema` (a JSON Schema object)."
+    },
+    "tool_choice": {
+      "$ref": "#/components/schemas/ToolChoice",
+      "description": "Controls which tool (if any) the model must call."
+    },
+    "metadata": {
+      "type": "object",
+      "title": "Metadata",
+      "description": "An object describing metadata about the request. Supports `user_id` for abuse detection.",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "An external identifier for the end user."
+        }
+      }
+    }
+  }
+}

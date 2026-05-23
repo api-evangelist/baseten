@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ResponseFormatJsonObject",
+  "title": "ResponseFormatJsonObject",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "json_object",
+      "title": "Type",
+      "type": "string",
+      "description": "The response format type, always `json_object`."
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "type": "object",
+  "description": "JSON object response format."
+}

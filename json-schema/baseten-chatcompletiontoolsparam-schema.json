@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionToolsParam",
+  "title": "ChatCompletionToolsParam",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "function",
+      "default": "function",
+      "title": "Type",
+      "type": "string",
+      "description": "The type of tool, always `function`."
+    },
+    "function": {
+      "$ref": "#/components/schemas/FunctionDefinition",
+      "description": "The function definition."
+    }
+  },
+  "required": [
+    "function"
+  ],
+  "type": "object",
+  "description": "A tool that the model can call."
+}

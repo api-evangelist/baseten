@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/FileFile",
+  "title": "FileFile",
+  "additionalProperties": false,
+  "properties": {
+    "file_data": {
+      "default": null,
+      "title": "File Data",
+      "description": "Base64-encoded file data.",
+      "type": "string"
+    },
+    "file_id": {
+      "default": null,
+      "title": "File Id",
+      "description": "A file ID for previously uploaded files.",
+      "type": "string"
+    },
+    "filename": {
+      "default": null,
+      "title": "Filename",
+      "description": "The filename.",
+      "type": "string"
+    }
+  },
+  "type": "object",
+  "description": "File data."
+}

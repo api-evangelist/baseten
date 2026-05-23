@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/File",
+  "title": "File",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "file",
+      "title": "Type",
+      "type": "string",
+      "description": "The content type, always `file`."
+    },
+    "file": {
+      "$ref": "#/components/schemas/FileFile",
+      "description": "The file data."
+    }
+  },
+  "required": [
+    "type",
+    "file"
+  ],
+  "type": "object",
+  "description": "File content part."
+}

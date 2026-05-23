@@ -1,0 +1,295 @@
+{
+  "provider": "Baseten",
+  "providerId": "baseten",
+  "kind": "json-structure",
+  "description": "Structural overview of the Baseten API surface; extracted from openapi/.",
+  "schemaCount": 34,
+  "operationCount": 1,
+  "schemas": [
+    {
+      "name": "ChatCompletionContentPartImageParam",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "image_url"
+      ]
+    },
+    {
+      "name": "ChatCompletionContentPartInputAudioParam",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "input_audio"
+      ]
+    },
+    {
+      "name": "ChatCompletionContentPartTextParam",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "text"
+      ]
+    },
+    {
+      "name": "ChatCompletionMessageToolCallParam",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "id",
+        "function",
+        "type"
+      ]
+    },
+    {
+      "name": "ChatCompletionNamedFunction",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ChatCompletionNamedToolChoiceParam",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "function"
+      ]
+    },
+    {
+      "name": "ChatCompletionToolsParam",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "function"
+      ]
+    },
+    {
+      "name": "DisaggregatedParams",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "request_type"
+      ]
+    },
+    {
+      "name": "File",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "file"
+      ]
+    },
+    {
+      "name": "FileFile",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Function",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "arguments",
+        "name"
+      ]
+    },
+    {
+      "name": "FunctionDefinition",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ImageURL",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "url"
+      ]
+    },
+    {
+      "name": "InputAudio",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "data",
+        "format"
+      ]
+    },
+    {
+      "name": "JsonSchema",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "name",
+        "schema"
+      ]
+    },
+    {
+      "name": "ResponseFormatGrammar",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "grammar"
+      ]
+    },
+    {
+      "name": "ResponseFormatJson",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "json_schema"
+      ]
+    },
+    {
+      "name": "ResponseFormatJsonObject",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "ResponseFormatStructuralTag",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "type",
+        "structural_tag"
+      ]
+    },
+    {
+      "name": "ResponseFormatText",
+      "type": "object",
+      "propertyCount": 1,
+      "required": [
+        "type"
+      ]
+    },
+    {
+      "name": "StreamOptions",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ChatCompletionRequest",
+      "type": "object",
+      "propertyCount": 43,
+      "required": [
+        "messages",
+        "model"
+      ]
+    },
+    {
+      "name": "ChatCompletionLogProb",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "token"
+      ]
+    },
+    {
+      "name": "ChatCompletionLogProbs",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ChatCompletionLogProbsContent",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "token"
+      ]
+    },
+    {
+      "name": "ChatCompletionResponseStreamChoice",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "index",
+        "delta"
+      ]
+    },
+    {
+      "name": "CompletionTokensDetails",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "DeltaMessage",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "FunctionCall",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "arguments"
+      ]
+    },
+    {
+      "name": "PromptTokensDetails",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ToolCall",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "index",
+        "function"
+      ]
+    },
+    {
+      "name": "UsageInfo",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "ChatCompletionResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "model",
+        "choices"
+      ]
+    },
+    {
+      "name": "ChatCompletionMessage",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "role"
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/v1/chat/completions",
+      "operationId": "createChatCompletion",
+      "summary": "Create a chat completion",
+      "tags": [
+        "Chat Completions"
+      ]
+    }
+  ]
+}

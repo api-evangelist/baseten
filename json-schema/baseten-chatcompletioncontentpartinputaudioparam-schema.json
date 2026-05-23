@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionContentPartInputAudioParam",
+  "title": "ChatCompletionContentPartInputAudioParam",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "input_audio",
+      "title": "Type",
+      "type": "string",
+      "description": "The content type, always `input_audio`."
+    },
+    "input_audio": {
+      "$ref": "#/components/schemas/InputAudio",
+      "description": "The audio data and format."
+    }
+  },
+  "required": [
+    "type",
+    "input_audio"
+  ],
+  "type": "object",
+  "description": "Audio content part for audio-capable models."
+}

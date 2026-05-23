@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionResponseStreamChoice",
+  "title": "ChatCompletionResponseStreamChoice",
+  "additionalProperties": false,
+  "properties": {
+    "index": {
+      "title": "Index",
+      "type": "integer",
+      "description": "The index of this choice in the list of choices."
+    },
+    "delta": {
+      "$ref": "#/components/schemas/DeltaMessage",
+      "description": "The delta content for streaming responses."
+    },
+    "logprobs": {
+      "default": null,
+      "description": "Log probability information for the choice.",
+      "$ref": "#/components/schemas/ChatCompletionLogProbs"
+    },
+    "finish_reason": {
+      "default": null,
+      "title": "Finish Reason",
+      "description": "The reason the model stopped generating: `stop` (natural stop or stop sequence), `length` (max tokens reached), or `tool_calls` (model called a tool).",
+      "type": "string"
+    },
+    "stop_reason": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "default": null,
+      "title": "Stop Reason",
+      "description": "The specific stop sequence or token ID that caused generation to stop."
+    }
+  },
+  "required": [
+    "index",
+    "delta"
+  ],
+  "type": "object",
+  "description": "A choice in the chat completion response."
+}

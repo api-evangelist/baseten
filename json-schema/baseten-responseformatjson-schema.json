@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ResponseFormatJson",
+  "title": "ResponseFormatJson",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "json_schema",
+      "title": "Type",
+      "type": "string",
+      "description": "The response format type, always `json_schema`."
+    },
+    "json_schema": {
+      "$ref": "#/components/schemas/JsonSchema",
+      "description": "The JSON schema definition."
+    }
+  },
+  "required": [
+    "type",
+    "json_schema"
+  ],
+  "type": "object",
+  "description": "JSON schema response format for structured outputs."
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionNamedFunction",
+  "title": "ChatCompletionNamedFunction",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "description": "The name of the function to call."
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "description": "Specifies a function to call by name."
+}

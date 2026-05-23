@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatCompletionContentPartImageParam",
+  "title": "ChatCompletionContentPartImageParam",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "const": "image_url",
+      "title": "Type",
+      "type": "string",
+      "description": "The content type, always `image_url`."
+    },
+    "image_url": {
+      "$ref": "#/components/schemas/ImageURL",
+      "description": "The image URL and detail settings."
+    }
+  },
+  "required": [
+    "type",
+    "image_url"
+  ],
+  "type": "object",
+  "description": "Image content part for vision models."
+}
