@@ -93,6 +93,8 @@ common:
     url: rate-limits/baseten-rate-limits.yml
   - type: FinOps
     url: finops/baseten-finops.yml
+  - type: LLMsTxt
+    url: https://docs.baseten.co/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
