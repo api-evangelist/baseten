@@ -1,0 +1,390 @@
+{
+  "item": [
+    {
+      "id": "806a109b-d433-457d-b1ee-d809730ca3c2",
+      "name": "Messages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fde09fb-bbf7-4d44-a163-1858052c4a99",
+          "name": "Create a message",
+          "request": {
+            "name": "Create a message",
+            "description": {
+              "content": "Creates a response message for the provided conversation. Compatible with the Anthropic Messages API, so the Anthropic SDK works against this endpoint by changing `base_url` and overriding the default `x-api-key` header with `Authorization`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": true\n      },\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"input_schema\": {\n        \"key_0\": \"string\",\n        \"key_1\": 1978\n      },\n      \"description\": \"<string>\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"<string>\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "307a2ab9-a8b4-427a-9640-fc5559aa4835",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"role\": \"string\",\n  \"content\": [\n    {\n      \"type\": \"string\",\n      \"text\": \"string\"\n    },\n    {\n      \"type\": \"string\",\n      \"text\": \"string\"\n    }\n  ],\n  \"model\": \"string\",\n  \"stop_reason\": \"stop_sequence\",\n  \"usage\": {\n    \"input_tokens\": 7195,\n    \"output_tokens\": 5216,\n    \"key_0\": \"string\",\n    \"key_1\": 7391.234303001463\n  },\n  \"stop_sequence\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd9b54eb-d4ec-429a-9c8a-2ea371374cb9",
+              "name": "Bad request: invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e251cf7-b6cf-4eb1-aac7-af96d1ecb295",
+              "name": "Unauthorized: invalid or missing API key. The Anthropic SDK's default `x-api-key` header is not accepted — pass `Authorization: Bearer <BASETEN_API_KEY>` or `Authorization: Api-Key <BASETEN_API_KEY>`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c28302d8-2d88-454e-b1a5-17343f271d76",
+              "name": "Model not found or does not support the Messages API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e1f89ae-e01a-4456-ab8d-e5285aa1a2c8",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cdafdece-3a15-4a01-bb20-3e4eb8e1f99b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"assistant\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"string\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"system\": \"<string>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number>\",\n  \"top_k\": \"<integer>\",\n  \"stop_sequences\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"stream\": false,\n  \"tools\": [\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 8968,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"input_schema\": {\n        \"key_0\": 6983.3696064998085,\n        \"key_1\": true\n      },\n      \"description\": \"string\"\n    }\n  ],\n  \"tool_choice\": {\n    \"type\": \"string\",\n    \"disable_parallel_tool_use\": false\n  },\n  \"metadata\": {\n    \"user_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://inference.baseten.co",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "54de9001-1425-4c1c-908d-c6341e7308ef",
+    "name": "Baseten Anthropic-Compatible Inference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anthropic Messages API-compatible endpoint for Baseten Model APIs. Point the Anthropic SDK or any Messages API client at this endpoint to call supported models.",
+      "type": "text/plain"
+    }
+  }
+}
