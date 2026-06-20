@@ -6,7 +6,7 @@ description: >-
   Baseten is a production inference platform for deploying and serving custom and pre-trained ML models. Offers a Model
   APIs catalog with OpenAI-compatible endpoints (DeepSeek, Qwen, GLM, Nemotron), dedicated deployments via Truss,
   autoscaling GPU compute, async/queue inference, training, chains (multi-model workflows), and management APIs.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - AI
   - ML
@@ -25,7 +25,7 @@ apis:
     description: >-
       OpenAI-compatible chat completions for Baseten's Model APIs catalog (DeepSeek V4, Qwen, GLM, Nemotron, etc.).
       Per-million-token pricing.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.baseten.co/reference/inference-api/llm-openapi-spec
     baseURL: https://inference.baseten.co/v1
     tags:
@@ -43,7 +43,7 @@ apis:
   - aid: baseten:messages
     name: Baseten Anthropic-Compatible Messages API
     description: Anthropic Messages-compatible inference for compatible Model APIs models.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.baseten.co/reference/inference-api/messages-openapi-spec
     baseURL: https://inference.baseten.co
     tags:
@@ -61,7 +61,7 @@ apis:
     description: >-
       Deployment management, async/queued inference, chain calls (multi-model workflows), training, dedicated-deployment
       lifecycle, async result polling, and webhook delivery.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.baseten.co/api-reference
     baseURL: https://api.baseten.co
     tags:
