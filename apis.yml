@@ -76,6 +76,12 @@ apis:
       - type: TrussCLI
         url: https://docs.baseten.co/
 common:
+  - type: TrustCenter
+    url: security/baseten-trust-center.yml
+  - type: DomainSecurity
+    url: security/baseten-domain-security.yml
+  - type: Authentication
+    url: authentication/baseten-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/basetenlabs
   - type: LinkedIn
@@ -94,6 +100,8 @@ common:
     url: finops/baseten-finops.yml
   - type: LlmsText
     url: https://docs.baseten.co/llms.txt
+  - type: Blog
+    url: https://www.baseten.co/blog/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

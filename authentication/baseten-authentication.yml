@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/baseten-llm-openapi.json, openapi/baseten-messages-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Use `Api-Key` as the scheme in the Authorization header: `Authorization: Api-Key
+    YOUR_API_KEY`.'
+  sources:
+  - openapi/baseten-llm-openapi.json
+  - openapi/baseten-messages-openapi.json

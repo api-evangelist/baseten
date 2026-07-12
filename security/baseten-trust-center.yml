@@ -1,0 +1,20 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://trust.baseten.co/
+url: https://trust.baseten.co/
+certifications:
+- SOC 2
+- PCI DSS
+- HIPAA
+- GDPR
+- CSA STAR
+evidence:
+- source: https://trust.baseten.co/
+  keywords:
+  - soc 2
+  - pci dss
+  - hipaa
+  - trust center
+  - gdpr
+  - csa star
