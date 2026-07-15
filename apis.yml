@@ -76,6 +76,8 @@ apis:
       - type: TrussCLI
         url: https://docs.baseten.co/
 common:
+  - type: AgenticAccess
+    url: agentic-access/baseten-agentic-access.yml
   - type: TrustCenter
     url: security/baseten-trust-center.yml
   - type: DomainSecurity
