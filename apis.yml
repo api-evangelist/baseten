@@ -6,7 +6,20 @@ description: >-
   Baseten is a production inference platform for deploying and serving custom and pre-trained ML models. Offers a Model
   APIs catalog with OpenAI-compatible endpoints (DeepSeek, Qwen, GLM, Nemotron), dedicated deployments via Truss,
   autoscaling GPU compute, async/queue inference, training, chains (multi-model workflows), and management APIs.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/baseten.png
 tags:
   - AI
   - ML
@@ -20,61 +33,53 @@ created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: baseten:llm-inference
-    name: Baseten LLM Inference API
-    description: >-
-      OpenAI-compatible chat completions for Baseten's Model APIs catalog (DeepSeek V4, Qwen, GLM, Nemotron, etc.).
-      Per-million-token pricing.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.baseten.co/reference/inference-api/llm-openapi-spec
-    baseURL: https://inference.baseten.co/v1
-    tags:
-      - AI
-      - LLM
-      - Chat Completions
-      - OpenAI Compatible
-    properties:
-      - type: Documentation
-        url: https://docs.baseten.co/
-      - type: OpenAPI
-        url: openapi/baseten-llm-openapi.json
-      - type: Pricing
-        url: https://www.baseten.co/pricing/
-  - aid: baseten:messages
-    name: Baseten Anthropic-Compatible Messages API
-    description: Anthropic Messages-compatible inference for compatible Model APIs models.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.baseten.co/reference/inference-api/messages-openapi-spec
-    baseURL: https://inference.baseten.co
-    tags:
-      - AI
-      - LLM
-      - Anthropic Compatible
-      - Messages
-    properties:
-      - type: Documentation
-        url: https://docs.baseten.co/
-      - type: OpenAPI
-        url: openapi/baseten-messages-openapi.json
-  - aid: baseten:management
-    name: Baseten Management & Async API
-    description: >-
-      Deployment management, async/queued inference, chain calls (multi-model workflows), training, dedicated-deployment
-      lifecycle, async result polling, and webhook delivery.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.baseten.co/api-reference
-    baseURL: https://api.baseten.co
-    tags:
-      - Management
-      - Async
-      - Webhooks
-      - Deployment
-      - Training
-    properties:
-      - type: Documentation
-        url: https://docs.baseten.co/api-reference
-      - type: TrussCLI
-        url: https://docs.baseten.co/
+- aid: baseten:management
+  name: Baseten Management & Async API
+  description: >-
+    Deployment management, async/queued inference, chain calls (multi-model workflows), training, dedicated-deployment
+    lifecycle, async result polling, and webhook delivery.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.baseten.co/api-reference
+  baseURL: https://api.baseten.co
+  tags:
+  - Management
+  - Async
+  - Webhooks
+  - Deployment
+  - Training
+  properties:
+  - type: Documentation
+    url: https://docs.baseten.co/api-reference
+  - type: TrussCLI
+    url: https://docs.baseten.co/
+- aid: baseten:baseten-chat-completions-api
+  name: Baseten Chat Completions API
+  description: The Chat Completions API from Baseten — 1 operation(s) for chat completions.
+  humanURL: https://docs.baseten.co/reference/inference-api/llm-openapi-spec
+  baseURL: https://inference.baseten.co/v1
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/baseten-chat-completions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.baseten.co/
+  - type: Pricing
+    url: https://www.baseten.co/pricing/
+- aid: baseten:baseten-messages-api
+  name: Baseten Messages API
+  description: The Messages API from Baseten — 1 operation(s) for messages.
+  humanURL: https://docs.baseten.co/reference/inference-api/llm-openapi-spec
+  baseURL: https://inference.baseten.co/v1
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/baseten-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.baseten.co/
+  - type: Pricing
+    url: https://www.baseten.co/pricing/
 common:
   - type: AgenticAccess
     url: agentic-access/baseten-agentic-access.yml
