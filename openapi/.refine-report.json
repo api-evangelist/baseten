@@ -1,0 +1,16 @@
+{
+  "provider": "baseten",
+  "sources": [
+    "baseten-chat-completions-api-openapi.yml",
+    "baseten-messages-api-openapi.yml"
+  ],
+  "outputs": [
+    "baseten-chat-completions-api-openapi.yml",
+    "baseten-messages-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
