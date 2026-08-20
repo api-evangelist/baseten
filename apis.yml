@@ -21,6 +21,15 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/baseten.png
 tags:
+  - Artificial Intelligence
+  - ML
+  - Inference
+  - Deployment
+  - MLOps
+  - OpenAI-Compatible
+  - Anthropic Compatible
+  - Truss
+tags_raw:
   - AI
   - ML
   - Inference
@@ -42,6 +51,12 @@ apis:
   humanURL: https://docs.baseten.co/api-reference
   baseURL: https://api.baseten.co
   tags:
+  - Management
+  - Async
+  - Webhook
+  - Deployment
+  - Training
+  tags_raw:
   - Management
   - Async
   - Webhooks
@@ -72,6 +87,8 @@ apis:
   humanURL: https://docs.baseten.co/reference/inference-api/llm-openapi-spec
   baseURL: https://inference.baseten.co/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
