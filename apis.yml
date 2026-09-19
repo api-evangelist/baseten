@@ -35,7 +35,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/baseten.png
 tags:
   - Artificial Intelligence
-  - ML
+  - Machine-Learning
   - Inference
   - Deployment
   - MLOps
