@@ -1,0 +1,31 @@
+# Front Door AI Index — baseten — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: baseten
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.baseten.co
+  final_host: www.baseten.co
+  ownership: own
+  owner: baseten
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 41
+  host_score: 41
+  density: 42.22
+  words: 971
+  tiers:
+    agentic: 25
+    core: 16
+    model: 0
+  ambiguous: 1
+  top_terms:
+    inference: 21
+    AI: 11
+    LLMs: 3
+    embedding: 2
+    fine-tune: 2
+    gen ai: 2
+    agent: 1

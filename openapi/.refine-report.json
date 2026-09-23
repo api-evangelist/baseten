@@ -1,8 +1,8 @@
 {
   "provider": "baseten",
   "sources": [
-    "baseten-chat-completions-api-openapi.yml",
-    "baseten-messages-api-openapi.yml"
+    "_original/baseten-llm-openapi.json",
+    "_original/baseten-messages-openapi.json"
   ],
   "outputs": [
     "baseten-chat-completions-api-openapi.yml",
@@ -11,6 +11,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "baseten-llm-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "baseten-llm-openapi.json: declared missing tag: Chat Completions",
+    "baseten-messages-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "baseten-messages-openapi.json: declared missing tag: Messages",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "baseten-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "baseten-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
