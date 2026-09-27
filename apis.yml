@@ -39,7 +39,7 @@ x-docs-platform-checked: 2026-09-20
 x-docs-hosting: vercel
 tags:
   - Artificial Intelligence
-  - Machine-Learning
+  - Machine Learning
   - Inference
   - Deployment
   - MLOps
@@ -55,6 +55,7 @@ tags_raw:
   - OpenAI Compatible
   - Anthropic Compatible
   - Truss
+  - Machine-Learning
 created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.23'
