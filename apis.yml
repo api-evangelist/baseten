@@ -116,6 +116,9 @@ apis:
   - type: Pricing
     url: https://www.baseten.co/pricing/
 common:
+  - type: CapabilityMap
+    url: capabilities/baseten-capability-edges.yml
+    name: Baseten Business Capability Map
   - type: AgenticAccess
     url: agentic-access/baseten-agentic-access.yml
   - type: TrustCenter

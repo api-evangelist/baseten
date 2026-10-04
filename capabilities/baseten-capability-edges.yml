@@ -1,0 +1,27 @@
+slug: baseten
+provider: Baseten
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Chat Completions
+  spec_file: baseten-chat-completions-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: '"OpenAI-compatible API for Baseten Model APIs. Use this endpoint to interact with hosted
+    LLMs." — POST /v1/chat/completions createChatCompletion'
+  reason: Baseten is a production inference platform; this tag exposes hosted LLM inference. The runtime
+    serving of ML models maps to Artificial Intelligence Management (AI/ML model lifecycle, MLOps). Confidence
+    held at 0.75 because the single endpoint is inference consumption rather than full model lifecycle
+    management, so the sub-capability fit is good but not airtight.
