@@ -51,24 +51,33 @@ paths:
         source: "curl https://inference.baseten.co/v1/chat/completions \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Authorization: Api-Key $BASETEN_API_KEY\" \\\n  -d '{\n    \"model\": \"deepseek-ai/DeepSeek-V4-Pro\",\n    \"messages\": [\n      {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n      {\"role\": \"user\", \"content\": \"Hello!\"}\n    ]\n  }'"
 components:
   schemas:
-    ChatCompletionContentPartTextParam:
+    UsageInfo:
       additionalProperties: false
       properties:
-        type:
-          const: text
-          title: Type
-          type: string
-          description: The content type, always `text`.
-        text:
-          title: Text
-          type: string
-          description: The text content.
-      required:
-      - type
-      - text
-      title: ChatCompletionContentPartTextParam
+        completion_tokens:
+          default: 0
+          title: Completion Tokens
+          type: integer
+          description: Number of tokens in the generated completion.
+        prompt_tokens:
+          default: 0
+          title: Prompt Tokens
+          type: integer
+          description: Number of tokens in the prompt.
+        total_tokens:
+          default: 0
+          title: Total Tokens
+          type: integer
+          description: Total number of tokens used (prompt + completion).
+        completion_tokens_details:
+          $ref: '#/components/schemas/CompletionTokensDetails'
+          description: Breakdown of completion token usage.
+        prompt_tokens_details:
+          $ref: '#/components/schemas/PromptTokensDetails'
+          description: Breakdown of prompt token usage.
+      title: UsageInfo
       type: object
-      description: Text content part.
+      description: Token usage statistics for the request.
     ChatCompletionLogProbs:
       additionalProperties: false
       properties:
@@ -82,6 +91,22 @@ components:
       title: ChatCompletionLogProbs
       type: object
       description: Log probability information for the completion.
+    PromptTokensDetails:
+      additionalProperties: false
+      properties:
+        audio_tokens:
+          default: 0
+          title: Audio Tokens
+          type: integer
+          description: Number of audio tokens in the prompt.
+        cached_tokens:
+          default: 0
+          title: Cached Tokens
+          type: integer
+          description: Number of tokens retrieved from cache.
+      title: PromptTokensDetails
+      type: object
+      description: Breakdown of tokens used in the prompt.
     StreamOptions:
       additionalProperties: false
       properties:
@@ -98,6 +123,411 @@ components:
       title: StreamOptions
       type: object
       description: Options for streaming responses.
+    ResponseFormatGrammar:
+      additionalProperties: false
+      properties:
+        type:
+          const: grammar
+          title: Type
+          type: string
+          description: The response format type, always `grammar`.
+        grammar:
+          title: Grammar
+          type: string
+          description: The grammar definition string.
+      required:
+      - type
+      - grammar
+      title: ResponseFormatGrammar
+      type: object
+      description: Grammar-based response format.
+    InputAudio:
+      additionalProperties: false
+      properties:
+        data:
+          title: Data
+          type: string
+          description: Base64-encoded audio data.
+        format:
+          enum:
+          - wav
+          - mp3
+          title: Format
+          type: string
+          description: 'The audio format: `wav` or `mp3`.'
+      required:
+      - data
+      - format
+      title: InputAudio
+      type: object
+      description: Audio input data.
+    ChatCompletionMessage:
+      type: object
+      required:
+      - role
+      description: 'A message in the conversation. Supports roles: `system`, `user`, `assistant`, and `tool`.'
+      properties:
+        role:
+          type: string
+          enum:
+          - system
+          - user
+          - assistant
+          - tool
+          description: 'The role of the message author: `system` (instructions), `user` (input), `assistant` (model response), or `tool` (tool result).'
+        content:
+          anyOf:
+          - type: string
+          - type: array
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/ChatCompletionContentPartTextParam'
+              - $ref: '#/components/schemas/ChatCompletionContentPartImageParam'
+              - $ref: '#/components/schemas/ChatCompletionContentPartInputAudioParam'
+          description: The message content. Can be a string or an array of content parts (text, image, audio) for multimodal inputs.
+        name:
+          type: string
+          description: An optional name for the participant. Useful for distinguishing between multiple users or assistants.
+        tool_calls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatCompletionMessageToolCallParam'
+          description: Tool calls generated by the model (for assistant messages).
+        tool_call_id:
+          type: string
+          description: The ID of the tool call this message responds to (required for tool messages).
+    ChatCompletionNamedFunction:
+      additionalProperties: false
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the function to call.
+      required:
+      - name
+      title: ChatCompletionNamedFunction
+      type: object
+      description: Specifies a function to call by name.
+    ResponseFormatJson:
+      additionalProperties: false
+      properties:
+        type:
+          const: json_schema
+          title: Type
+          type: string
+          description: The response format type, always `json_schema`.
+        json_schema:
+          $ref: '#/components/schemas/JsonSchema'
+          description: The JSON schema definition.
+      required:
+      - type
+      - json_schema
+      title: ResponseFormatJson
+      type: object
+      description: JSON schema response format for structured outputs.
+    ResponseFormatJsonObject:
+      additionalProperties: false
+      properties:
+        type:
+          const: json_object
+          title: Type
+          type: string
+          description: The response format type, always `json_object`.
+      required:
+      - type
+      title: ResponseFormatJsonObject
+      type: object
+      description: JSON object response format.
+    ToolCall:
+      additionalProperties: false
+      properties:
+        index:
+          title: Index
+          type: integer
+          description: The index of this tool call in the list of tool calls.
+        id:
+          title: Id
+          type: string
+          description: A unique identifier for this tool call.
+        type:
+          const: function
+          default: function
+          title: Type
+          type: string
+          description: The type of tool call (always `function`).
+        function:
+          $ref: '#/components/schemas/FunctionCall'
+          description: The function that the model called.
+      required:
+      - index
+      - function
+      title: ToolCall
+      type: object
+      description: A tool call generated by the model.
+    FunctionDefinition:
+      additionalProperties: false
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the function.
+        description:
+          default: null
+          title: Description
+          description: A description of what the function does.
+          type: string
+        parameters:
+          default: null
+          title: Parameters
+          description: The parameters the function accepts, as a JSON Schema object.
+          additionalProperties: true
+          type: object
+        strict:
+          default: false
+          title: Strict
+          description: If `true`, enables strict schema adherence.
+          type: boolean
+      required:
+      - name
+      title: FunctionDefinition
+      type: object
+      description: A function definition that the model can call.
+    Function:
+      additionalProperties: false
+      properties:
+        arguments:
+          anyOf:
+          - type: string
+          - additionalProperties: true
+            type: object
+          title: Arguments
+          description: The function arguments as a JSON string or object.
+        name:
+          title: Name
+          type: string
+          description: The name of the function.
+      required:
+      - arguments
+      - name
+      title: Function
+      type: object
+      description: The arguments to call the function with, as generated by the model in JSON format. The model may not always generate valid JSON and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
+    JsonSchema:
+      additionalProperties: false
+      properties:
+        name:
+          title: Name
+          type: string
+          description: The name of the schema.
+        description:
+          default: null
+          title: Description
+          description: A description of the schema.
+          type: string
+        schema:
+          additionalProperties: true
+          title: Schema
+          type: object
+          description: The JSON Schema definition.
+        strict:
+          default: true
+          title: Strict
+          description: If `true`, enables strict schema adherence.
+          const: true
+          type: boolean
+      required:
+      - name
+      - schema
+      title: JsonSchema
+      type: object
+      description: A JSON schema for structured output.
+    CompletionTokensDetails:
+      additionalProperties: false
+      properties:
+        accepted_prediction_tokens:
+          default: 0
+          title: Accepted Prediction Tokens
+          type: integer
+          description: Number of tokens in accepted predictions (for speculative decoding).
+        audio_tokens:
+          default: 0
+          title: Audio Tokens
+          type: integer
+          description: Number of audio tokens generated.
+        reasoning_tokens:
+          default: 0
+          title: Reasoning Tokens
+          type: integer
+          description: Number of tokens used for reasoning (for models that support extended thinking).
+        rejected_prediction_tokens:
+          default: 0
+          title: Rejected Prediction Tokens
+          type: integer
+          description: Number of tokens in rejected predictions (for speculative decoding).
+      title: CompletionTokensDetails
+      type: object
+      description: Breakdown of tokens used in the completion.
+    ChatCompletionContentPartImageParam:
+      additionalProperties: false
+      properties:
+        type:
+          const: image_url
+          title: Type
+          type: string
+          description: The content type, always `image_url`.
+        image_url:
+          $ref: '#/components/schemas/ImageURL'
+          description: The image URL and detail settings.
+      required:
+      - type
+      - image_url
+      title: ChatCompletionContentPartImageParam
+      type: object
+      description: Image content part for vision models.
+    ChatCompletionNamedToolChoiceParam:
+      additionalProperties: false
+      properties:
+        function:
+          $ref: '#/components/schemas/ChatCompletionNamedFunction'
+          description: The function to call.
+        type:
+          const: function
+          default: function
+          title: Type
+          type: string
+          description: The type, always `function`.
+      required:
+      - function
+      title: ChatCompletionNamedToolChoiceParam
+      type: object
+      description: Forces the model to call a specific function.
+    ChatCompletionResponse:
+      additionalProperties: false
+      properties:
+        id:
+          title: Id
+          type: string
+          description: A unique identifier for the chat completion.
+        object:
+          const: chat.completion.chunk
+          default: chat.completion.chunk
+          title: Object
+          type: string
+          description: The object type, always `chat.completion` or `chat.completion.chunk` for streaming.
+        created:
+          title: Created
+          type: integer
+          description: The Unix timestamp (in seconds) of when the completion was created.
+        model:
+          title: Model
+          type: string
+          description: The model used for the completion.
+        choices:
+          items:
+            $ref: '#/components/schemas/ChatCompletionResponseStreamChoice'
+          title: Choices
+          type: array
+          description: A list of chat completion choices.
+        usage:
+          default: null
+          description: 'Token usage statistics for the request. Only present when streaming with `stream_options.include_usage: true`.'
+          $ref: '#/components/schemas/UsageInfo'
+      required:
+      - model
+      - choices
+      title: ChatCompletionStreamResponse
+      type: object
+      description: A chat completion response returned by the model.
+    ResponseFormatText:
+      additionalProperties: false
+      properties:
+        type:
+          const: text
+          title: Type
+          type: string
+          description: The response format type, always `text`.
+      required:
+      - type
+      title: ResponseFormatText
+      type: object
+      description: Plain text response format.
+    DisaggregatedParams:
+      additionalProperties: false
+      properties:
+        request_type:
+          title: Request Type
+          type: string
+          description: The type of disaggregated request.
+        first_gen_tokens:
+          default: null
+          title: First Gen Tokens
+          description: First generation tokens for continuation.
+          items:
+            type: integer
+          type: array
+        ctx_request_id:
+          default: null
+          title: Ctx Request Id
+          description: Context request identifier.
+          type: integer
+        opaque_state:
+          default: null
+          title: Opaque State
+          description: Opaque state for continuation.
+          type: string
+        draft_tokens:
+          default: null
+          title: Draft Tokens
+          description: Draft tokens for speculative decoding.
+          items:
+            type: integer
+          type: array
+        multimodal_embedding_handles:
+          default: null
+          title: Multimodal Embedding Handles
+          description: Handles for multimodal embeddings.
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+        multimodal_hashes:
+          default: null
+          title: Multimodal Hashes
+          description: Hashes for multimodal content.
+          items:
+            items:
+              type: integer
+            type: array
+          type: array
+      required:
+      - request_type
+      title: DisaggregatedParams
+      type: object
+      description: Advanced parameters for disaggregated serving. Used internally.
+    ChatCompletionLogProb:
+      additionalProperties: false
+      properties:
+        token:
+          title: Token
+          type: string
+          description: The token string.
+        logprob:
+          default: -9999
+          title: Logprob
+          type: number
+          description: The log probability of the token.
+        bytes:
+          default: null
+          title: Bytes
+          description: The UTF-8 byte representation of the token.
+          items:
+            type: integer
+          type: array
+      required:
+      - token
+      title: ChatCompletionLogProb
+      type: object
+      description: Log probability information for a token.
     ChatCompletionRequest:
       additionalProperties: false
       properties:
@@ -370,299 +800,6 @@ components:
       title: ChatCompletionRequest
       type: object
       description: Request body for creating a chat completion.
-    ChatCompletionLogProb:
-      additionalProperties: false
-      properties:
-        token:
-          title: Token
-          type: string
-          description: The token string.
-        logprob:
-          default: -9999
-          title: Logprob
-          type: number
-          description: The log probability of the token.
-        bytes:
-          default: null
-          title: Bytes
-          description: The UTF-8 byte representation of the token.
-          items:
-            type: integer
-          type: array
-      required:
-      - token
-      title: ChatCompletionLogProb
-      type: object
-      description: Log probability information for a token.
-    ChatCompletionContentPartInputAudioParam:
-      additionalProperties: false
-      properties:
-        type:
-          const: input_audio
-          title: Type
-          type: string
-          description: The content type, always `input_audio`.
-        input_audio:
-          $ref: '#/components/schemas/InputAudio'
-          description: The audio data and format.
-      required:
-      - type
-      - input_audio
-      title: ChatCompletionContentPartInputAudioParam
-      type: object
-      description: Audio content part for audio-capable models.
-    ResponseFormatText:
-      additionalProperties: false
-      properties:
-        type:
-          const: text
-          title: Type
-          type: string
-          description: The response format type, always `text`.
-      required:
-      - type
-      title: ResponseFormatText
-      type: object
-      description: Plain text response format.
-    ToolCall:
-      additionalProperties: false
-      properties:
-        index:
-          title: Index
-          type: integer
-          description: The index of this tool call in the list of tool calls.
-        id:
-          title: Id
-          type: string
-          description: A unique identifier for this tool call.
-        type:
-          const: function
-          default: function
-          title: Type
-          type: string
-          description: The type of tool call (always `function`).
-        function:
-          $ref: '#/components/schemas/FunctionCall'
-          description: The function that the model called.
-      required:
-      - index
-      - function
-      title: ToolCall
-      type: object
-      description: A tool call generated by the model.
-    UsageInfo:
-      additionalProperties: false
-      properties:
-        completion_tokens:
-          default: 0
-          title: Completion Tokens
-          type: integer
-          description: Number of tokens in the generated completion.
-        prompt_tokens:
-          default: 0
-          title: Prompt Tokens
-          type: integer
-          description: Number of tokens in the prompt.
-        total_tokens:
-          default: 0
-          title: Total Tokens
-          type: integer
-          description: Total number of tokens used (prompt + completion).
-        completion_tokens_details:
-          $ref: '#/components/schemas/CompletionTokensDetails'
-          description: Breakdown of completion token usage.
-        prompt_tokens_details:
-          $ref: '#/components/schemas/PromptTokensDetails'
-          description: Breakdown of prompt token usage.
-      title: UsageInfo
-      type: object
-      description: Token usage statistics for the request.
-    ResponseFormatJson:
-      additionalProperties: false
-      properties:
-        type:
-          const: json_schema
-          title: Type
-          type: string
-          description: The response format type, always `json_schema`.
-        json_schema:
-          $ref: '#/components/schemas/JsonSchema'
-          description: The JSON schema definition.
-      required:
-      - type
-      - json_schema
-      title: ResponseFormatJson
-      type: object
-      description: JSON schema response format for structured outputs.
-    JsonSchema:
-      additionalProperties: false
-      properties:
-        name:
-          title: Name
-          type: string
-          description: The name of the schema.
-        description:
-          default: null
-          title: Description
-          description: A description of the schema.
-          type: string
-        schema:
-          additionalProperties: true
-          title: Schema
-          type: object
-          description: The JSON Schema definition.
-        strict:
-          default: true
-          title: Strict
-          description: If `true`, enables strict schema adherence.
-          const: true
-          type: boolean
-      required:
-      - name
-      - schema
-      title: JsonSchema
-      type: object
-      description: A JSON schema for structured output.
-    InputAudio:
-      additionalProperties: false
-      properties:
-        data:
-          title: Data
-          type: string
-          description: Base64-encoded audio data.
-        format:
-          enum:
-          - wav
-          - mp3
-          title: Format
-          type: string
-          description: 'The audio format: `wav` or `mp3`.'
-      required:
-      - data
-      - format
-      title: InputAudio
-      type: object
-      description: Audio input data.
-    ResponseFormatGrammar:
-      additionalProperties: false
-      properties:
-        type:
-          const: grammar
-          title: Type
-          type: string
-          description: The response format type, always `grammar`.
-        grammar:
-          title: Grammar
-          type: string
-          description: The grammar definition string.
-      required:
-      - type
-      - grammar
-      title: ResponseFormatGrammar
-      type: object
-      description: Grammar-based response format.
-    Function:
-      additionalProperties: false
-      properties:
-        arguments:
-          anyOf:
-          - type: string
-          - additionalProperties: true
-            type: object
-          title: Arguments
-          description: The function arguments as a JSON string or object.
-        name:
-          title: Name
-          type: string
-          description: The name of the function.
-      required:
-      - arguments
-      - name
-      title: Function
-      type: object
-      description: The arguments to call the function with, as generated by the model in JSON format. The model may not always generate valid JSON and may hallucinate parameters not defined by your function schema. Validate the arguments in your code before calling your function.
-    ImageURL:
-      additionalProperties: false
-      properties:
-        url:
-          title: Url
-          type: string
-          description: The URL of the image, or a base64-encoded data URL.
-        detail:
-          default: null
-          title: Detail
-          description: 'The detail level: `auto` (default), `low` (512px max), or `high` (full resolution).'
-          enum:
-          - auto
-          - low
-          - high
-          type: string
-      required:
-      - url
-      title: ImageURL
-      type: object
-      description: An image URL with optional detail settings.
-    ChatCompletionMessage:
-      type: object
-      required:
-      - role
-      description: 'A message in the conversation. Supports roles: `system`, `user`, `assistant`, and `tool`.'
-      properties:
-        role:
-          type: string
-          enum:
-          - system
-          - user
-          - assistant
-          - tool
-          description: 'The role of the message author: `system` (instructions), `user` (input), `assistant` (model response), or `tool` (tool result).'
-        content:
-          anyOf:
-          - type: string
-          - type: array
-            items:
-              anyOf:
-              - $ref: '#/components/schemas/ChatCompletionContentPartTextParam'
-              - $ref: '#/components/schemas/ChatCompletionContentPartImageParam'
-              - $ref: '#/components/schemas/ChatCompletionContentPartInputAudioParam'
-          description: The message content. Can be a string or an array of content parts (text, image, audio) for multimodal inputs.
-        name:
-          type: string
-          description: An optional name for the participant. Useful for distinguishing between multiple users or assistants.
-        tool_calls:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatCompletionMessageToolCallParam'
-          description: Tool calls generated by the model (for assistant messages).
-        tool_call_id:
-          type: string
-          description: The ID of the tool call this message responds to (required for tool messages).
-    ChatCompletionMessageToolCallParam:
-      additionalProperties: false
-      properties:
-        id:
-          title: Id
-          type: string
-          description: The ID of the tool call.
-        index:
-          title: Index
-          description: The index of the tool call.
-          type: integer
-        function:
-          $ref: '#/components/schemas/Function'
-          description: The function that was called.
-        type:
-          const: function
-          title: Type
-          type: string
-          description: The type, always `function`.
-      required:
-      - id
-      - function
-      - type
-      title: ChatCompletionMessageToolCallParam
-      type: object
-      description: A tool call in an assistant message.
     ResponseFormatStructuralTag:
       additionalProperties: false
       properties:
@@ -681,74 +818,6 @@ components:
       title: ResponseFormatStructuralTag
       type: object
       description: Structural tag response format.
-    ChatCompletionLogProbsContent:
-      additionalProperties: false
-      properties:
-        token:
-          title: Token
-          type: string
-          description: The token string.
-        logprob:
-          default: -9999
-          title: Logprob
-          type: number
-          description: The log probability of the token.
-        bytes:
-          default: null
-          title: Bytes
-          description: The UTF-8 byte representation of the token.
-          items:
-            type: integer
-          type: array
-        top_logprobs:
-          default: null
-          title: Top Logprobs
-          description: List of the most likely tokens and their log probabilities at this position.
-          items:
-            $ref: '#/components/schemas/ChatCompletionLogProb'
-          type: array
-      required:
-      - token
-      title: ChatCompletionLogProbsContent
-      type: object
-      description: Log probability information for a token in the content.
-    ChatCompletionResponse:
-      additionalProperties: false
-      properties:
-        id:
-          title: Id
-          type: string
-          description: A unique identifier for the chat completion.
-        object:
-          const: chat.completion.chunk
-          default: chat.completion.chunk
-          title: Object
-          type: string
-          description: The object type, always `chat.completion` or `chat.completion.chunk` for streaming.
-        created:
-          title: Created
-          type: integer
-          description: The Unix timestamp (in seconds) of when the completion was created.
-        model:
-          title: Model
-          type: string
-          description: The model used for the completion.
-        choices:
-          items:
-            $ref: '#/components/schemas/ChatCompletionResponseStreamChoice'
-          title: Choices
-          type: array
-          description: A list of chat completion choices.
-        usage:
-          default: null
-          description: 'Token usage statistics for the request. Only present when streaming with `stream_options.include_usage: true`.'
-          $ref: '#/components/schemas/UsageInfo'
-      required:
-      - model
-      - choices
-      title: ChatCompletionStreamResponse
-      type: object
-      description: A chat completion response returned by the model.
     ChatCompletionToolsParam:
       additionalProperties: false
       properties:
@@ -766,71 +835,23 @@ components:
       title: ChatCompletionToolsParam
       type: object
       description: A tool that the model can call.
-    CompletionTokensDetails:
-      additionalProperties: false
-      properties:
-        accepted_prediction_tokens:
-          default: 0
-          title: Accepted Prediction Tokens
-          type: integer
-          description: Number of tokens in accepted predictions (for speculative decoding).
-        audio_tokens:
-          default: 0
-          title: Audio Tokens
-          type: integer
-          description: Number of audio tokens generated.
-        reasoning_tokens:
-          default: 0
-          title: Reasoning Tokens
-          type: integer
-          description: Number of tokens used for reasoning (for models that support extended thinking).
-        rejected_prediction_tokens:
-          default: 0
-          title: Rejected Prediction Tokens
-          type: integer
-          description: Number of tokens in rejected predictions (for speculative decoding).
-      title: CompletionTokensDetails
-      type: object
-      description: Breakdown of tokens used in the completion.
-    DeltaMessage:
-      additionalProperties: false
-      properties:
-        role:
-          default: null
-          title: Role
-          description: The role of the message author (typically `assistant`).
-          type: string
-        content:
-          default: null
-          title: Content
-          description: The content chunk generated by the model.
-          type: string
-        tool_calls:
-          items:
-            $ref: '#/components/schemas/ToolCall'
-          title: Tool Calls
-          type: array
-          description: Tool calls generated by the model.
-      title: DeltaMessage
-      type: object
-      description: A delta message chunk in a streaming response.
-    ChatCompletionContentPartImageParam:
+    ChatCompletionContentPartInputAudioParam:
       additionalProperties: false
       properties:
         type:
-          const: image_url
+          const: input_audio
           title: Type
           type: string
-          description: The content type, always `image_url`.
-        image_url:
-          $ref: '#/components/schemas/ImageURL'
-          description: The image URL and detail settings.
+          description: The content type, always `input_audio`.
+        input_audio:
+          $ref: '#/components/schemas/InputAudio'
+          description: The audio data and format.
       required:
       - type
-      - image_url
-      title: ChatCompletionContentPartImageParam
+      - input_audio
+      title: ChatCompletionContentPartInputAudioParam
       type: object
-      description: Image content part for vision models.
+      description: Audio content part for audio-capable models.
     ChatCompletionResponseStreamChoice:
       additionalProperties: false
       properties:
@@ -863,23 +884,124 @@ components:
       title: ChatCompletionResponseStreamChoice
       type: object
       description: A choice in the chat completion response.
-    ChatCompletionNamedToolChoiceParam:
+    ChatCompletionMessageToolCallParam:
       additionalProperties: false
       properties:
+        id:
+          title: Id
+          type: string
+          description: The ID of the tool call.
+        index:
+          title: Index
+          description: The index of the tool call.
+          type: integer
         function:
-          $ref: '#/components/schemas/ChatCompletionNamedFunction'
-          description: The function to call.
+          $ref: '#/components/schemas/Function'
+          description: The function that was called.
         type:
           const: function
-          default: function
           title: Type
           type: string
           description: The type, always `function`.
       required:
+      - id
       - function
-      title: ChatCompletionNamedToolChoiceParam
+      - type
+      title: ChatCompletionMessageToolCallParam
       type: object
-      description: Forces the model to call a specific function.
+      description: A tool call in an assistant message.
+    ChatCompletionContentPartTextParam:
+      additionalProperties: false
+      properties:
+        type:
+          const: text
+          title: Type
+          type: string
+          description: The content type, always `text`.
+        text:
+          title: Text
+          type: string
+          description: The text content.
+      required:
+      - type
+      - text
+      title: ChatCompletionContentPartTextParam
+      type: object
+      description: Text content part.
+    DeltaMessage:
+      additionalProperties: false
+      properties:
+        role:
+          default: null
+          title: Role
+          description: The role of the message author (typically `assistant`).
+          type: string
+        content:
+          default: null
+          title: Content
+          description: The content chunk generated by the model.
+          type: string
+        tool_calls:
+          items:
+            $ref: '#/components/schemas/ToolCall'
+          title: Tool Calls
+          type: array
+          description: Tool calls generated by the model.
+      title: DeltaMessage
+      type: object
+      description: A delta message chunk in a streaming response.
+    ChatCompletionLogProbsContent:
+      additionalProperties: false
+      properties:
+        token:
+          title: Token
+          type: string
+          description: The token string.
+        logprob:
+          default: -9999
+          title: Logprob
+          type: number
+          description: The log probability of the token.
+        bytes:
+          default: null
+          title: Bytes
+          description: The UTF-8 byte representation of the token.
+          items:
+            type: integer
+          type: array
+        top_logprobs:
+          default: null
+          title: Top Logprobs
+          description: List of the most likely tokens and their log probabilities at this position.
+          items:
+            $ref: '#/components/schemas/ChatCompletionLogProb'
+          type: array
+      required:
+      - token
+      title: ChatCompletionLogProbsContent
+      type: object
+      description: Log probability information for a token in the content.
+    ImageURL:
+      additionalProperties: false
+      properties:
+        url:
+          title: Url
+          type: string
+          description: The URL of the image, or a base64-encoded data URL.
+        detail:
+          default: null
+          title: Detail
+          description: 'The detail level: `auto` (default), `low` (512px max), or `high` (full resolution).'
+          enum:
+          - auto
+          - low
+          - high
+          type: string
+      required:
+      - url
+      title: ImageURL
+      type: object
+      description: An image URL with optional detail settings.
     FunctionCall:
       additionalProperties: false
       properties:
@@ -897,128 +1019,6 @@ components:
       title: FunctionCall
       type: object
       description: The name and arguments of a function that should be called, as generated by the model.
-    PromptTokensDetails:
-      additionalProperties: false
-      properties:
-        audio_tokens:
-          default: 0
-          title: Audio Tokens
-          type: integer
-          description: Number of audio tokens in the prompt.
-        cached_tokens:
-          default: 0
-          title: Cached Tokens
-          type: integer
-          description: Number of tokens retrieved from cache.
-      title: PromptTokensDetails
-      type: object
-      description: Breakdown of tokens used in the prompt.
-    ResponseFormatJsonObject:
-      additionalProperties: false
-      properties:
-        type:
-          const: json_object
-          title: Type
-          type: string
-          description: The response format type, always `json_object`.
-      required:
-      - type
-      title: ResponseFormatJsonObject
-      type: object
-      description: JSON object response format.
-    DisaggregatedParams:
-      additionalProperties: false
-      properties:
-        request_type:
-          title: Request Type
-          type: string
-          description: The type of disaggregated request.
-        first_gen_tokens:
-          default: null
-          title: First Gen Tokens
-          description: First generation tokens for continuation.
-          items:
-            type: integer
-          type: array
-        ctx_request_id:
-          default: null
-          title: Ctx Request Id
-          description: Context request identifier.
-          type: integer
-        opaque_state:
-          default: null
-          title: Opaque State
-          description: Opaque state for continuation.
-          type: string
-        draft_tokens:
-          default: null
-          title: Draft Tokens
-          description: Draft tokens for speculative decoding.
-          items:
-            type: integer
-          type: array
-        multimodal_embedding_handles:
-          default: null
-          title: Multimodal Embedding Handles
-          description: Handles for multimodal embeddings.
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-        multimodal_hashes:
-          default: null
-          title: Multimodal Hashes
-          description: Hashes for multimodal content.
-          items:
-            items:
-              type: integer
-            type: array
-          type: array
-      required:
-      - request_type
-      title: DisaggregatedParams
-      type: object
-      description: Advanced parameters for disaggregated serving. Used internally.
-    ChatCompletionNamedFunction:
-      additionalProperties: false
-      properties:
-        name:
-          title: Name
-          type: string
-          description: The name of the function to call.
-      required:
-      - name
-      title: ChatCompletionNamedFunction
-      type: object
-      description: Specifies a function to call by name.
-    FunctionDefinition:
-      additionalProperties: false
-      properties:
-        name:
-          title: Name
-          type: string
-          description: The name of the function.
-        description:
-          default: null
-          title: Description
-          description: A description of what the function does.
-          type: string
-        parameters:
-          default: null
-          title: Parameters
-          description: The parameters the function accepts, as a JSON Schema object.
-          additionalProperties: true
-          type: object
-        strict:
-          default: false
-          title: Strict
-          description: If `true`, enables strict schema adherence.
-          type: boolean
-      required:
-      - name
-      title: FunctionDefinition
-      type: object
-      description: A function definition that the model can call.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
