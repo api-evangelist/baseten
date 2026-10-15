@@ -77,7 +77,18 @@
     note: 'baseten declares OpenAI compatibility: ''description: OpenAI-compatible API for Baseten Model APIs. Use
       this endpoint to interact with hosted LLMs.'''
     detected_by: sweep-model-routing.py
-    detected: '2026-10-13'
+    detected: '2026-10-15'
+  status: not-a-workflow
+  arazzo: null
+- slug: baseten-llamaindex
+  label: LlamaIndex
+  partner: llamaindex
+  partner_name: LlamaIndex
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings/llama-index-embeddings-baseten
+  source: edge
+  relationship: system-coverage
   status: not-a-workflow
   arazzo: null
 - slug: baseten-livekit-agents
@@ -91,14 +102,30 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
-- slug: baseten-llamaindex
-  label: LlamaIndex
-  partner: llamaindex
-  partner_name: LlamaIndex
-  type: coverage
-  channel: partner-built
-  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/embeddings/llama-index-embeddings-baseten
+- slug: baseten-n8n
+  label: n8n
+  partner: n8n
+  partner_name: n8n
+  type: marketplace
+  marketplace: n8n-community
+  channel: open-source-node
+  evidence: https://www.npmjs.com/package/@basetenlabs/n8n-nodes-baseten
   source: edge
-  relationship: system-coverage
-  status: not-a-workflow
+  relationship: ipaas-bridge
+  contract_reference:
+    register: n8n community nodes (npm keyword n8n-community-node-package)
+    spec_file: null
+    role: ipaas-connector:n8n-community
+    registered_name: '@basetenlabs/n8n-nodes-baseten'
+    matched_domain: baseten.co
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    package: '@basetenlabs/n8n-nodes-baseten'
+    version: 1.0.0
+    published: '2026-03-02T21:25:40.328Z'
+    matched_on: publisher-email
+    builder: provider (package published from the provider's own domain)
+  status: pending-generation
   arazzo: null
