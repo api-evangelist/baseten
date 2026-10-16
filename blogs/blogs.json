@@ -2,21 +2,21 @@
   "repo": "baseten",
   "feeds": [
     {
-      "source": "https://docs.baseten.co/llms.txt",
-      "feed_url": "https://docs.baseten.co/llms.txt",
-      "title": "",
-      "saved": 0,
-      "method": "none"
-    },
-    {
       "source": "https://www.baseten.co/blog/",
       "feed_url": "https://www.baseten.co/blog/",
       "title": "",
       "saved": 0,
       "method": "none"
+    },
+    {
+      "source": "https://docs.baseten.co/llms.txt",
+      "feed_url": "https://docs.baseten.co/llms.txt",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 8,
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
