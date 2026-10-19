@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.baseten.co/reference/inference-api/inference-api-spec.json",
+ "final": "https://docs.baseten.co/reference/inference-api/inference-api-spec.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 59342,
+ "sha256": "1a6e00687a35813e51dad90ba2e08e27713763f784fe636a8fb9583f36380a8f",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

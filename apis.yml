@@ -115,6 +115,40 @@ apis:
     url: https://docs.baseten.co/
   - type: Pricing
     url: https://www.baseten.co/pricing/
+- aid: baseten:baseten-async-request-api
+  name: Baseten Async Request API
+  description: The Async Request API from Baseten — 1 operation(s) for async request.
+  humanURL: https://docs.baseten.co/api-reference
+  baseURL: https://api.baseten.co
+  tags:
+  - Async Request
+  properties:
+  - type: OpenAPI
+    url: openapi/baseten-async-request-api-openapi.yml
+- aid: baseten:baseten-non-regional-api
+  name: Baseten Non Regional API
+  description: >-
+    Endpoints that use path-based routing (e.g. `/production/predict`, `/environments/{env_name}/predict`).
+    Only available on standard hostnames (`model-{model_id}.api.baseten.co`), not regional hostnames.
+  humanURL: https://docs.baseten.co/api-reference
+  baseURL: https://api.baseten.co
+  tags:
+  - Non-Regional
+  properties:
+  - type: OpenAPI
+    url: openapi/baseten-non-regional-api-openapi.yml
+- aid: baseten:baseten-regional-api
+  name: Baseten Regional API
+  description: >-
+    Endpoints that use bare paths (e.g. `/predict`, `/wake`). Only available on regional hostnames (`model-{model_id}-{env_name}.api.baseten.co`),
+    where the environment is determined by the hostname.
+  humanURL: https://docs.baseten.co/api-reference
+  baseURL: https://api.baseten.co
+  tags:
+  - Regional
+  properties:
+  - type: OpenAPI
+    url: openapi/baseten-regional-api-openapi.yml
 common:
   - type: CapabilityMap
     url: capabilities/baseten-capability-edges.yml

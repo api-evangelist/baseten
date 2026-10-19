@@ -2,22 +2,30 @@
   "provider": "baseten",
   "sources": [
     "_original/baseten-llm-openapi.json",
-    "_original/baseten-messages-openapi.json"
+    "_original/baseten-messages-openapi.json",
+    "_original/baseten-openapi.json"
   ],
   "outputs": [
     "baseten-chat-completions-api-openapi.yml",
-    "baseten-messages-api-openapi.yml"
+    "baseten-messages-api-openapi.yml",
+    "baseten-async-request-api-openapi.yml",
+    "baseten-non-regional-api-openapi.yml",
+    "baseten-regional-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "baseten-llm-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "baseten-llm-openapi.json: declared missing tag: Chat Completions",
     "baseten-messages-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "baseten-messages-openapi.json: declared missing tag: Messages",
-    "apis.yml register: already-registered"
+    "baseten-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "baseten-openapi.json: tagged paths GET /async_request/{request_id} -> Async Request",
+    "baseten-openapi.json: tagged paths DELETE /async_request/{request_id} -> Async Request",
+    "baseten-openapi.json: declared missing tag: Async Request",
+    "apis.yml register: written (+3 apis, 6 total)"
   ],
   "skipped": [
     "baseten-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
