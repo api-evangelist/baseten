@@ -3,7 +3,9 @@ method: searched
 checked:
 - https://aws.amazon.com/marketplace/
 - https://azuremarketplace.microsoft.com/
+- https://cloudsecurityalliance.org/star/registry
 - https://developers.cloudflare.com/ai-gateway/usage/providers/
+- https://eucoc.cloud/en/public-register/list-of-adherent-services
 - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
 - https://github.com/livekit/agents/tree/main/livekit-plugins
 - https://github.com/run-llama/llama_index/tree/main/llama-index-integrations
@@ -41,83 +43,6 @@ edges:
   seller_name: Baseten Labs Inc
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
-- partner_name: OpenRouter
-  partner: openrouter
-  partner_match: router
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://openrouter.ai/api/v1/models
-  coverage_role:
-  - inference-host
-  router_signals:
-    inference-host:
-      models: 8
-      router_ids:
-      - BaseTen
-      tools_share: 1.0
-      structured_output_share: 0.62
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
-- partner_name: LiteLLM
-  partner: litellm
-  partner_match: router
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
-  coverage_role:
-  - provider
-  router_signals:
-    provider:
-      models: 27
-      router_ids:
-      - baseten
-      tools_share: 0.67
-      structured_output_share: 0.67
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
-- partner_name: Cloudflare AI Gateway
-  partner: cloudflare-ai-gateway
-  partner_match: router
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/ai-gateway/usage/providers/baseten.mdx
-  coverage_role:
-  - provider
-  router_signals:
-    provider:
-      models: null
-      router_ids:
-      - baseten
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
-- partner_name: OpenAI
-  partner: openai
-  partner_match: domain
-  type: contract
-  channel: provider-built
-  relationship: compatible
-  direction: provider-built
-  evidence: https://github.com/api-evangelist/baseten/blob/main/openapi/baseten-chat-completions-api-openapi.yml#L5
-  contract_reference:
-    repo: baseten
-    spec_file: baseten-chat-completions-api-openapi.yml
-    property: description
-    value: OpenAI-compatible
-    note: 'baseten declares OpenAI compatibility: ''description: OpenAI-compatible API for Baseten Model APIs. Use
-      this endpoint to interact with hosted LLMs.'''
-    detected_by: sweep-model-routing.py
-    detected: '2026-10-15'
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
 - partner_name: LlamaIndex
   partner: llamaindex
   partner_match: framework
@@ -185,5 +110,112 @@ edges:
     builder: provider (package published from the provider's own domain)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: Cloudflare AI Gateway
+  partner: cloudflare-ai-gateway
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/docs/ai-gateway/usage/providers/baseten.mdx
+  coverage_role:
+  - provider
+  router_signals:
+    provider:
+      models: null
+      router_ids:
+      - baseten
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: Cloud Security Alliance STAR Registry
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://cloudsecurityalliance.org/star/registry/baseten-labs-inc/services/dedicated-inference-managed-apis-training
+  category: Cloud security assurance
+  contract_reference:
+    register: CSA STAR Registry (cloudsecurityalliance.org/star/registry)
+    spec_file: null
+    standard: CSA STAR
+    role: star-level-1
+    registered_name: Baseten Labs, Inc.
+    registry_id: baseten-labs-inc
+    service_url: https://www.baseten.co/
+    matched_domain: baseten.co
+    matched_by: domain
+    identity_source: the service URL the organisation filed on its STAR listing (no lookup)
+    levels:
+    - STAR Level 1
+    certified_products: []
+    signal_note: STAR Level 1 (CAIQ self-assessment) = participation; certified_products = one entry per STAR Level
+      2 / STAR for AI Level 2 assessment TYPE (third-party certification, attestation, C-STAR, ValidAIted); lapsed
+      = every instance marked (Deprecated) by the registry; service counts never recorded
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
+- partner_name: OpenRouter
+  partner: openrouter
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://openrouter.ai/api/v1/models
+  coverage_role:
+  - inference-host
+  router_signals:
+    inference-host:
+      models: 8
+      router_ids:
+      - BaseTen
+      tools_share: 1.0
+      structured_output_share: 0.62
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: LiteLLM
+  partner: litellm
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+  coverage_role:
+  - provider
+  router_signals:
+    provider:
+      models: 27
+      router_ids:
+      - baseten
+      tools_share: 0.67
+      structured_output_share: 0.67
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/baseten/blob/main/openapi/baseten-chat-completions-api-openapi.yml#L5
+  contract_reference:
+    repo: baseten
+    spec_file: baseten-chat-completions-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'baseten declares OpenAI compatibility: ''description: OpenAI-compatible API for Baseten Model APIs. Use
+      this endpoint to interact with hosted LLMs.'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-15'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
 source:
 - https://registry.npmjs.org/-/v1/search?text=keywords:n8n-community-node-package
