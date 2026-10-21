@@ -11,6 +11,8 @@ checked:
 - https://github.com/run-llama/llama_index/tree/main/llama-index-integrations
 - https://openrouter.ai/api/v1/models
 - https://registry.npmjs.org/-/v1/search?text=keywords:n8n-community-node-package
+- n8n/integrations/n8n-integration-edges.yml
+- terraform/integrations/terraform-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -110,6 +112,46 @@ edges:
     builder: provider (package published from the provider's own domain)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: OpenRouter
+  partner: openrouter
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://openrouter.ai/api/v1/models
+  coverage_role:
+  - inference-host
+  router_signals:
+    inference-host:
+      models: 11
+      router_ids:
+      - BaseTen
+      tools_share: 0.91
+      structured_output_share: 0.55
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: LiteLLM
+  partner: litellm
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+  coverage_role:
+  - provider
+  router_signals:
+    provider:
+      models: 32
+      router_ids:
+      - baseten
+      tools_share: 0.72
+      structured_output_share: 0.69
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
 - partner_name: Cloudflare AI Gateway
   partner: cloudflare-ai-gateway
   partner_match: router
@@ -126,6 +168,25 @@ edges:
       router_ids:
       - baseten
   matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/baseten/blob/main/openapi/baseten-chat-completions-api-openapi.yml#L5
+  contract_reference:
+    repo: baseten
+    spec_file: baseten-chat-completions-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'baseten declares OpenAI compatibility: ''description: OpenAI-compatible API for Baseten Model APIs. Use
+      this endpoint to interact with hosted LLMs.'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-19'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
 - partner_name: Cloud Security Alliance STAR Registry
@@ -158,64 +219,39 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
-- partner_name: OpenRouter
-  partner: openrouter
-  partner_match: router
+- partner_name: n8n (n8n-community)
+  partner: n8n
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
   channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://openrouter.ai/api/v1/models
-  coverage_role:
-  - inference-host
-  router_signals:
-    inference-host:
-      models: 8
-      router_ids:
-      - BaseTen
-      tools_share: 1.0
-      structured_output_share: 0.62
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
-- partner_name: LiteLLM
-  partner: litellm
-  partner_match: router
+  marketplace: n8n-community
+  evidence: https://www.npmjs.com/package/@basetenlabs/n8n-nodes-baseten
+  mirror_of: n8n/integrations/n8n-integration-edges.yml
+  apps: []
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+- partner_name: Terraform (terraform-registry)
+  partner: terraform
+  partner_match: mirror
+  mirror_match: register
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
   channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
-  coverage_role:
-  - provider
-  router_signals:
-    provider:
-      models: 27
-      router_ids:
-      - baseten
-      tools_share: 0.67
-      structured_output_share: 0.67
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
-- partner_name: OpenAI
-  partner: openai
-  partner_match: domain
-  type: contract
-  channel: provider-built
-  relationship: compatible
-  direction: provider-built
-  evidence: https://github.com/api-evangelist/baseten/blob/main/openapi/baseten-chat-completions-api-openapi.yml#L5
-  contract_reference:
-    repo: baseten
-    spec_file: baseten-chat-completions-api-openapi.yml
-    property: description
-    value: OpenAI-compatible
-    note: 'baseten declares OpenAI compatibility: ''description: OpenAI-compatible API for Baseten Model APIs. Use
-      this endpoint to interact with hosted LLMs.'''
-    detected_by: sweep-model-routing.py
-    detected: '2026-10-15'
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
+  marketplace: terraform-registry
+  evidence: https://registry.terraform.io/providers/basetenlabs/baseten
+  mirror_of: terraform/integrations/terraform-integration-edges.yml
+  apps:
+  - basetenlabs/baseten
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: infrastructure-as-code provider registry listing
+  badges:
+  - Verified publisher (GitHub domain-verified organization)
 source:
 - https://registry.npmjs.org/-/v1/search?text=keywords:n8n-community-node-package
