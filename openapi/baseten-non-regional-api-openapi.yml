@@ -732,3 +732,9 @@ components:
       type: http
       scheme: bearer
       description: 'Pass your Baseten API key. Clients automatically send `Authorization: Bearer <key>`. Direct callers can also use `Authorization: Api-Key <key>`; both schemes are accepted.'
+x-provenance:
+  method: harvested
+  publisher: Baseten
+  source: https://docs.baseten.co/reference/inference-api/inference-api-spec.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
