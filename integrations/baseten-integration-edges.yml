@@ -19,6 +19,7 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -225,6 +226,33 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-compliance-assurance.py
   first_seen: '2026-10-20'
+- partner_name: Battery Ventures
+  partner: battery-ventures
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.battery.com/company/baseten/
+  category: vc portfolio participation
+  contract_reference:
+    register: Battery Ventures companies (battery.com/company/, the page's own admin-ajax list + company pages)
+    standard: null
+    spec_file: null
+    role: vc-portfolio-company
+    registered_name: Baseten
+    register_id: https://www.battery.com/company/baseten/
+    register_country: San Francisco, California
+    register_website: https://www.baseten.co/
+    matched_domain: baseten.co
+    matched_by: domain
+    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-vc-portfolios.py
+    detected: '2026-10-21'
+    status: Active
+  detected_by: sweep-vc-portfolios.py
+  first_seen: '2026-10-21'
 - partner_name: n8n (n8n-community)
   partner: n8n
   partner_match: mirror
@@ -259,32 +287,32 @@ edges:
   category: infrastructure-as-code provider registry listing
   badges:
   - Verified publisher (GitHub domain-verified organization)
-- partner_name: Battery Ventures
-  partner: battery-ventures
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://www.battery.com/company/baseten/
-  category: vc portfolio participation
-  contract_reference:
-    register: Battery Ventures companies (battery.com/company/, the page's own admin-ajax list + company pages)
-    standard: null
-    spec_file: null
-    role: vc-portfolio-company
-    registered_name: Baseten
-    register_id: https://www.battery.com/company/baseten/
-    register_country: San Francisco, California
-    register_website: https://www.baseten.co/
-    matched_domain: baseten.co
-    matched_by: domain
-    signal_note: 'participation only: the venture firm''s own published portfolio lists the company (investment);
-      an ownership and participation record, not conformance or certification'
-    detected_by: sweep-vc-portfolios.py
-    detected: '2026-10-21'
-    status: Active
-  detected_by: sweep-vc-portfolios.py
-  first_seen: '2026-10-21'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/baseten
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - baseten/quant_calibration_dataset_v1
+  - baseten/DeepSeek-V3-FP4
+  - baseten/Kimi-K2-Instruct-FP4
+  - baseten/GLM-5.2-Vision-NVFP4
+  - baseten/GLM-5.2-Vision-FP8
+  - baseten/mixtral_i32000_o4096_bs4_tp2-tllm_0.9.0.dev2024022000
+  - baseten/mixtral_i32000_o1024_bs4_tp1_H100_int8_weights_only-tllm_0.9.0.dev2024040200
+  - baseten/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4-dequant-to-BF16
+  - baseten/orpheus-3b-0.1-ft
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 source:
 - https://registry.npmjs.org/-/v1/search?text=keywords:n8n-community-node-package
