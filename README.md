@@ -1,4 +1,4 @@
-# Baseten (baseten)
+# Baseten
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,106 +66,173 @@
 
 Baseten is a production inference platform for deploying and serving custom and pre-trained ML models. Offers a Model APIs catalog with OpenAI-compatible endpoints (DeepSeek, Qwen, GLM, Nemotron), dedicated deployments via Truss, autoscaling GPU compute, async/queue inference, training, chains (multi-model workflows), and management APIs.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/baseten/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/baseten/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Machine Learning · Inference · Deployment · MLOps · OpenAI-Compatible · Anthropic Compatible · Truss
 
-## Tags
+## Baseten on APIs.io
 
-- AI
-- ML
-- Inference
-- Deployment
-- MLOps
-- OpenAI Compatible
-- Anthropic Compatible
-- Truss
+Everything profiled for Baseten is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/baseten/](https://apis.io/providers/baseten/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (3)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-19
+- [Baseten Management & Async API](https://apis.io/apis/baseten/management/) — Deployment management, async/queued inference, chain calls (multi-model workflows), training, dedicated-deployment lifecycle, async result polling, and…
+- [Baseten Chat Completions API](https://apis.io/apis/baseten/baseten-chat-completions-api/) — The Chat Completions API from Baseten — 1 operation(s) for chat completions.
+- [Baseten Messages API](https://apis.io/apis/baseten/baseten-messages-api/) — The Messages API from Baseten — 1 operation(s) for messages.
 
-## APIs
+### Published properties
 
-### Baseten LLM Inference API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenAI-compatible chat completions for Baseten's Model APIs catalog (DeepSeek V4, Qwen, GLM, Nemotron, etc.). Per-million-token pricing.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.baseten.co/reference/inference-api/llm-openapi-spec](https://docs.baseten.co/reference/inference-api/llm-openapi-spec)
-- **Base URL:** `https://inference.baseten.co/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [Moved to /providers/baseten/](https://apis.io/servers/baseten/baseten/)
 
-- AI
-- LLM
-- Chat Completions
-- OpenAI Compatible
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.baseten.co/)
-- [OpenAPI](openapi/baseten-llm-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/baseten-llm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/baseten-llm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Pricing](https://www.baseten.co/pricing/)
+- [Baseten Agentic Access](https://apis.io/agentic-access/baseten/baseten-agentic-access/)
 
-### Baseten Anthropic-Compatible Messages API
+#### JSON Schema (43)
 
-Anthropic Messages-compatible inference for compatible Model APIs models.
+The data models the API reads and writes.
 
-- **Human URL:** [https://docs.baseten.co/reference/inference-api/messages-openapi-spec](https://docs.baseten.co/reference/inference-api/messages-openapi-spec)
-- **Base URL:** `https://inference.baseten.co`
+- [ChatCompletionContentPartImageParam](https://apis.io/schemas/baseten/baseten-chatcompletioncontentpartimageparam/)
+- [ChatCompletionContentPartInputAudioParam](https://apis.io/schemas/baseten/baseten-chatcompletioncontentpartinputaudioparam/)
+- [ChatCompletionContentPartTextParam](https://apis.io/schemas/baseten/baseten-chatcompletioncontentparttextparam/)
+- [ChatCompletionLogProb](https://apis.io/schemas/baseten/baseten-chatcompletionlogprob/)
+- [ChatCompletionLogProbs](https://apis.io/schemas/baseten/baseten-chatcompletionlogprobs/)
+- [ChatCompletionLogProbsContent](https://apis.io/schemas/baseten/baseten-chatcompletionlogprobscontent/)
+- [ChatCompletionMessage](https://apis.io/schemas/baseten/baseten-chatcompletionmessage/)
+- [ChatCompletionMessageToolCallParam](https://apis.io/schemas/baseten/baseten-chatcompletionmessagetoolcallparam/)
+- [ChatCompletionNamedFunction](https://apis.io/schemas/baseten/baseten-chatcompletionnamedfunction/)
+- [ChatCompletionNamedToolChoiceParam](https://apis.io/schemas/baseten/baseten-chatcompletionnamedtoolchoiceparam/)
+- [ChatCompletionRequest](https://apis.io/schemas/baseten/baseten-chatcompletionrequest/)
+- [ChatCompletionStreamResponse](https://apis.io/schemas/baseten/baseten-chatcompletionresponse/)
+- [ChatCompletionResponseStreamChoice](https://apis.io/schemas/baseten/baseten-chatcompletionresponsestreamchoice/)
+- [ChatCompletionToolsParam](https://apis.io/schemas/baseten/baseten-chatcompletiontoolsparam/)
+- [CompletionTokensDetails](https://apis.io/schemas/baseten/baseten-completiontokensdetails/)
+- [DeltaMessage](https://apis.io/schemas/baseten/baseten-deltamessage/)
+- [DisaggregatedParams](https://apis.io/schemas/baseten/baseten-disaggregatedparams/)
+- [File](https://apis.io/schemas/baseten/baseten-file/)
+- [FileFile](https://apis.io/schemas/baseten/baseten-filefile/)
+- [Function](https://apis.io/schemas/baseten/baseten-function/)
+- [FunctionCall](https://apis.io/schemas/baseten/baseten-functioncall/)
+- [FunctionDefinition](https://apis.io/schemas/baseten/baseten-functiondefinition/)
+- [ImageURL](https://apis.io/schemas/baseten/baseten-imageurl/)
+- [InputAudio](https://apis.io/schemas/baseten/baseten-inputaudio/)
+- [InputMessage](https://apis.io/schemas/baseten/baseten-inputmessage/)
+- …and 18 more published on APIs.io
 
-#### Tags
+#### JSON Structure (1)
 
-- AI
-- LLM
-- Anthropic Compatible
-- Messages
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Baseten Structure](https://apis.io/json-structure/baseten/baseten-structure/)
 
-- [Documentation](https://docs.baseten.co/)
-- [OpenAPI](openapi/baseten-messages-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/baseten-messages.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/baseten-messages.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (4)
 
-### Baseten Management & Async API
+Postman and Open Collection request collections.
 
-Deployment management, async/queued inference, chain calls (multi-model workflows), training, dedicated-deployment lifecycle, async result polling, and webhook delivery.
+- [Baseten LLM Inference Chat Completions API](https://apis.io/collections/baseten/open-baseten-chat-completions-api/)
+- [Baseten LLM Inference API](https://apis.io/collections/baseten/open-baseten-llm/)
+- [Baseten Anthropic-Compatible Inference API](https://apis.io/collections/baseten/open-baseten-messages/)
+- [Baseten LLM Inference Chat Completions Messages API](https://apis.io/collections/baseten/open-baseten-messages-api/)
 
-- **Human URL:** [https://docs.baseten.co/api-reference](https://docs.baseten.co/api-reference)
-- **Base URL:** `https://api.baseten.co`
+#### Governance rules (1)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- Management
-- Async
-- Webhooks
-- Deployment
-- Training
+- [Baseten — jsonschema rules](https://apis.io/rules/baseten/baseten-jsonschema-spectral-rules/)
 
-#### Properties
+#### Security (3)
 
-- [Documentation](https://docs.baseten.co/api-reference)
-- [Truss C L I](https://docs.baseten.co/)
-- [Postman Collection](collections/baseten-llm.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/baseten-llm.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/baseten-messages.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/baseten-messages.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-## Common Properties
+- [Baseten Authentication](https://apis.io/security/baseten/baseten-authentication/)
+- [Baseten Domain Security](https://apis.io/security/baseten/baseten-domain-security/)
+- [Baseten Trust Center](https://apis.io/security/baseten/baseten-trust-center/)
 
-- [GitHub Organization](https://github.com/basetenlabs)
-- [LinkedIn](https://www.linkedin.com/company/baseten)
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Baseten Plans Pricing](https://apis.io/plans/baseten/baseten-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Baseten Rate Limits](https://apis.io/rate-limits/baseten/baseten-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Baseten Finops](https://apis.io/finops/baseten/baseten-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.baseten.co/)
 - [Documentation](https://docs.baseten.co/)
 - [Pricing](https://www.baseten.co/pricing/)
-- [Plans](plans/baseten-plans-pricing.yml)
-- [Rate Limits](rate-limits/baseten-rate-limits.yml)
-- [Fin Ops](finops/baseten-finops.yml)
-- [L L Ms Txt](https://docs.baseten.co/llms.txt)
+- [Blog](https://www.baseten.co/blog/)
+- [GitHub](https://github.com/basetenlabs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.3** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 50.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 23.7 |
+
+**Agent readiness 26.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/baseten/](https://apis.io/providers/baseten/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Baseten: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/baseten/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
